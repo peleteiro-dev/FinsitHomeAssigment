@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FinsitHomeAssigment.Core.Model;
+using FinsitHomeAssigment.Core.Visitor;
+using System;
 
 namespace FinsitHomeAssigment
 {
@@ -6,7 +8,26 @@ namespace FinsitHomeAssigment
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("Starting program...\n");
+
+            var paragraph = new Paragraph();
+            paragraph.DocumentElements.Add(new Text());
+            paragraph.DocumentElements.Add(new BoldText());
+
+            var document = new Document();
+            document.DocumentElements.Add(paragraph);
+
+            var section = new Section();
+            section.DocumentElements.Add(new Section());
+            section.DocumentElements.Add(paragraph);
+
+            document.DocumentElements.Add(section);
+
+            document.Accept(new HtmlVisitor());
+
+            Console.WriteLine("\nFinishing program. Press enter to quit...");
+
+            Console.ReadLine();
         }
     }
 }

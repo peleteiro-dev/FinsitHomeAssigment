@@ -1,6 +1,5 @@
 ﻿using FinsitHomeAssigment.Core.Abstract;
 using FinsitHomeAssigment.Core.Interface;
-using System;
 
 namespace FinsitHomeAssigment.Core.Model
 {
@@ -10,7 +9,12 @@ namespace FinsitHomeAssigment.Core.Model
 
         public override void Accept(IDocumentVisitor documentVisitor)
         {
-            throw new NotImplementedException();
+            documentVisitor.Visit(this);
+
+            foreach (var documentElement in DocumentElements)
+            {
+                documentElement.Accept(documentVisitor);
+            }
         }
     }
 }

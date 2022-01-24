@@ -4,7 +4,7 @@ using System;
 
 namespace FinsitHomeAssigment.Core.Model
 {
-    class BoldText : DocumentElement
+    public class BoldText : DocumentElement
     {
         public string Content { get; set; }
 

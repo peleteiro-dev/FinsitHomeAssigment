@@ -4,7 +4,7 @@ using System;
 
 namespace FinsitHomeAssigment.Core.Model
 {
-    class Section : DocumentElement
+    public class Section : DocumentElement
     {
         public string Title { get; set; }
 

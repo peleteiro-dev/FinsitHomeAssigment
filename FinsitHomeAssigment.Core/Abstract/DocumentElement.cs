@@ -5,7 +5,7 @@ namespace FinsitHomeAssigment.Core.Abstract
 {
     public abstract class DocumentElement
     {
-        public IList<DocumentElement> DocumentElements { get; set; }
+        public IList<DocumentElement> DocumentElements { get; set; } = new List<DocumentElement>();
 
         public virtual void AddDocumentElement(DocumentElement documentElement)
         {

@@ -11,8 +11,8 @@ namespace FinsitHomeAssigment
             Console.WriteLine("Starting program...\n");
 
             var paragraph = new Paragraph();
-            paragraph.DocumentElements.Add(new Text());
-            paragraph.DocumentElements.Add(new BoldText());
+            paragraph.DocumentElements.Add(new Text("testing text"));
+            paragraph.DocumentElements.Add(new BoldText("bold text"));
 
             var document = new Document();
             document.DocumentElements.Add(paragraph);
@@ -24,6 +24,7 @@ namespace FinsitHomeAssigment
             document.DocumentElements.Add(section);
 
             document.Accept(new HtmlVisitor());
+            Console.WriteLine(document.Export());
 
             Console.WriteLine("\nFinishing program. Press enter to quit...");
 

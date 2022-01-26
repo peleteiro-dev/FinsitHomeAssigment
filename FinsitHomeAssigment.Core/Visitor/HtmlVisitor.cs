@@ -1,6 +1,5 @@
 ﻿using FinsitHomeAssigment.Core.Interface;
 using FinsitHomeAssigment.Core.Model;
-using System;
 
 namespace FinsitHomeAssigment.Core.Visitor
 {
@@ -8,27 +7,32 @@ namespace FinsitHomeAssigment.Core.Visitor
     {
         public void Visit(Document document)
         {
-            Console.WriteLine($"{document.GetType().Name} visited by {this.GetType().Name}");
+            document.OpeningTag = "<doc>";
+            document.ClosingTag = "</doc>";
         }
 
         public void Visit(Section section)
         {
-            Console.WriteLine($"{section.GetType().Name} visited by {this.GetType().Name}");
+            section.OpeningTag = "<section>";
+            section.ClosingTag = "</section>";
         }
 
         public void Visit(Paragraph paragraph)
         {
-            Console.WriteLine($"{paragraph.GetType().Name} visited by {this.GetType().Name}");
+            paragraph.OpeningTag = "<p>";
+            paragraph.ClosingTag = "</p>";
         }
 
         public void Visit(Text text)
         {
-            Console.WriteLine($"{text.GetType().Name} visited by {this.GetType().Name}");
+            text.OpeningTag = "<text>";
+            text.ClosingTag = "</text>";
         }
 
         public void Visit(BoldText boldText)
         {
-            Console.WriteLine($"{boldText.GetType().Name} visited by {this.GetType().Name}");
+            boldText.OpeningTag = "<bold>";
+            boldText.ClosingTag = "</bold>";
         }
     }
 }

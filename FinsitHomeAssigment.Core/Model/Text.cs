@@ -7,6 +7,11 @@ namespace FinsitHomeAssigment.Core.Model
     {
         public string Content { get; set; }
 
+        public Text(string content)
+        {
+            Content = content;
+        }
+
         public override void AddDocumentElement(DocumentElement documentElement)
         {
             // do nothing, it's a leaf, could also throw an exception
@@ -25,6 +30,11 @@ namespace FinsitHomeAssigment.Core.Model
         public override void Accept(IDocumentVisitor documentVisitor)
         {
             documentVisitor.Visit(this);
+        }
+
+        public override string Export()
+        {
+            return $"{OpeningTag}{Content}{ClosingTag}";
         }
     }
 }

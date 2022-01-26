@@ -6,6 +6,8 @@ namespace FinsitHomeAssigment.Core.Abstract
     public abstract class DocumentElement
     {
         public IList<DocumentElement> DocumentElements { get; set; } = new List<DocumentElement>();
+        public string OpeningTag { get; set; }
+        public string ClosingTag { get; set; }
 
         public virtual void AddDocumentElement(DocumentElement documentElement)
         {
@@ -27,5 +29,7 @@ namespace FinsitHomeAssigment.Core.Abstract
         }
 
         public abstract void Accept(IDocumentVisitor documentVisitor);
+
+        public abstract string Export();
     }
 }

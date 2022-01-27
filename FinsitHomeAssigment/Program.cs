@@ -24,7 +24,7 @@ namespace FinsitHomeAssigment
             document.DocumentElements.Add(section);
 
             document.Accept(new HtmlVisitor());
-            Console.WriteLine(document.Export());
+            Console.WriteLine(document.ExportedContent);
 
             Console.WriteLine("\nFinishing program. Press enter to quit...");
 

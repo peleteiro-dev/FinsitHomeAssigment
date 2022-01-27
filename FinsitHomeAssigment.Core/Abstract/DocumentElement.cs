@@ -1,5 +1,6 @@
 ﻿using FinsitHomeAssigment.Core.Interface;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace FinsitHomeAssigment.Core.Abstract
 {
@@ -8,6 +9,19 @@ namespace FinsitHomeAssigment.Core.Abstract
         public IList<DocumentElement> DocumentElements { get; set; } = new List<DocumentElement>();
         public string OpeningTag { get; set; }
         public string ClosingTag { get; set; }
+        public string ExportedContent { get; set; }
+
+        public virtual string GetContent(DocumentElement document)
+        {
+            var exportedContent = document.OpeningTag;
+
+            exportedContent = document.DocumentElements.Aggregate(exportedContent,
+                (current, documentElement) => current + documentElement.ExportedContent);
+
+            exportedContent += document.ClosingTag;
+
+            return exportedContent;
+        }
 
         public virtual void AddDocumentElement(DocumentElement documentElement)
         {

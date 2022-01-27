@@ -10,12 +10,12 @@ namespace FinsitHomeAssigment.Core.Model
 
         public override void Accept(IDocumentVisitor documentVisitor)
         {
-            documentVisitor.Visit(this);
-
             foreach (var documentElement in DocumentElements)
             {
                 documentElement.Accept(documentVisitor);
             }
+
+            documentVisitor.Visit(this);
         }
 
         public override string Export()

@@ -1,6 +1,5 @@
 ﻿using FinsitHomeAssigment.Core.Abstract;
 using FinsitHomeAssigment.Core.Interface;
-using System.Linq;
 
 namespace FinsitHomeAssigment.Core.Model
 {
@@ -14,16 +13,6 @@ namespace FinsitHomeAssigment.Core.Model
             }
 
             documentVisitor.Visit(this);
-        }
-
-        public override string Export()
-        {
-            var result = OpeningTag + "\n";
-
-            result = DocumentElements.Aggregate(result,
-                (current, documentElement) => current + documentElement.Export());
-
-            return $"{result}\n{ClosingTag}\n";
         }
     }
 }

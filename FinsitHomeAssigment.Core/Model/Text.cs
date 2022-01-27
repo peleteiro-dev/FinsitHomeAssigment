@@ -31,10 +31,5 @@ namespace FinsitHomeAssigment.Core.Model
         {
             documentVisitor.Visit(this);
         }
-
-        public override string Export()
-        {
-            return $"{OpeningTag}{Content}{ClosingTag}";
-        }
     }
 }

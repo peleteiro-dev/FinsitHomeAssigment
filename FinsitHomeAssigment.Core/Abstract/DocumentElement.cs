@@ -43,7 +43,5 @@ namespace FinsitHomeAssigment.Core.Abstract
         }
 
         public abstract void Accept(IDocumentVisitor documentVisitor);
-
-        public abstract string Export();
     }
 }

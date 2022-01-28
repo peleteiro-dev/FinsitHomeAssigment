@@ -7,6 +7,11 @@ namespace FinsitHomeAssigment.Core.Model
     {
         public string Title { get; set; }
 
+        public Section(string title)
+        {
+            Title = title;
+        }
+
         public override void Accept(IDocumentVisitor documentVisitor)
         {
             foreach (var documentElement in DocumentElements)

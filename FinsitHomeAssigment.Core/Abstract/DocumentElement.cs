@@ -6,14 +6,16 @@ namespace FinsitHomeAssigment.Core.Abstract
 {
     public abstract class DocumentElement
     {
-        public IList<DocumentElement> DocumentElements { get; set; } = new List<DocumentElement>();
+        public string Title { get; set; }
         public string OpeningTag { get; set; }
         public string ClosingTag { get; set; }
         public string ExportedContent { get; set; }
+        public IList<DocumentElement> DocumentElements { get; set; } = new List<DocumentElement>();
 
         public virtual string GetContent(DocumentElement document)
         {
             var exportedContent = document.OpeningTag;
+            exportedContent += document.Title;
 
             exportedContent = document.DocumentElements.Aggregate(exportedContent,
                 (current, documentElement) => current + documentElement.ExportedContent);

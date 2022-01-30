@@ -1,13 +1,10 @@
 ﻿using FinsitHomeAssigment.Core.Exporter;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace FinsitHomeAssigment.Core.Model
 {
     public abstract class DocumentElement
     {
-        public string OpeningTag { get; set; }
-        public string ClosingTag { get; set; }
         public string ExportedContent { get; set; }
         public IList<DocumentElement> DocumentElements { get; set; } = new List<DocumentElement>();
 

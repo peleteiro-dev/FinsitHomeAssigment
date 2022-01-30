@@ -6,7 +6,6 @@ namespace FinsitHomeAssigment.Core.Model
 {
     public abstract class DocumentElement
     {
-        public string Title { get; set; }
         public string OpeningTag { get; set; }
         public string ClosingTag { get; set; }
         public string ExportedContent { get; set; }

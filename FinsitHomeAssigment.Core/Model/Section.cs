@@ -5,6 +5,8 @@ namespace FinsitHomeAssigment.Core.Model
 {
     public class Section : DocumentElement
     {
+        public string Title { get; set; }
+
         public Section(string title)
         {
             Title = title;
@@ -32,7 +34,7 @@ namespace FinsitHomeAssigment.Core.Model
         public override string GetContent(DocumentElement document)
         {
             var exportedContent = document.OpeningTag;
-            exportedContent += document.Title;
+            exportedContent += Title;
 
             exportedContent = document.DocumentElements.Aggregate(exportedContent,
                 (current, documentElement) => current + documentElement.ExportedContent);

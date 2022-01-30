@@ -26,7 +26,6 @@ namespace FinsitHomeAssigment.Core.Model
         public override string GetContent(DocumentElement document)
         {
             var exportedContent = document.OpeningTag;
-            exportedContent += document.Title;
 
             exportedContent = document.DocumentElements.Aggregate(exportedContent,
                 (current, documentElement) => current + documentElement.ExportedContent);

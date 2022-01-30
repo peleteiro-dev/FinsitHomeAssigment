@@ -11,6 +11,11 @@ namespace FinsitHomeAssigment.Core.Model
             Content = content;
         }
 
+        public override bool IsComposite()
+        {
+            return false;
+        }
+
         public override void AddDocumentElement(DocumentElement documentElement)
         {
             // do nothing, it's a leaf, could also throw an exception
@@ -21,9 +26,9 @@ namespace FinsitHomeAssigment.Core.Model
             // do nothing, it's a leaf, could also throw an exception
         }
 
-        public override bool IsComposite()
+        public override string GetContent(DocumentElement document)
         {
-            return false;
+            return $"{document.OpeningTag}{Content}{document.ClosingTag}";
         }
 
         public override void Export(IDocumentExporter documentExporter)

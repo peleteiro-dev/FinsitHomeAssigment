@@ -12,38 +12,10 @@ namespace FinsitHomeAssigment.Core.Model
         public string ExportedContent { get; set; }
         public IList<DocumentElement> DocumentElements { get; set; } = new List<DocumentElement>();
 
-        public virtual string GetContent(DocumentElement document)
-        {
-            var exportedContent = document.OpeningTag;
-            exportedContent += document.Title;
-
-            exportedContent = document.DocumentElements.Aggregate(exportedContent,
-                (current, documentElement) => current + documentElement.ExportedContent);
-
-            exportedContent += document.ClosingTag;
-
-            return exportedContent;
-        }
-
-        public virtual void AddDocumentElement(DocumentElement documentElement)
-        {
-            if (documentElement == null) return;
-
-            DocumentElements.Add(documentElement);
-        }
-
-        public virtual void RemoveDocumentElement(DocumentElement documentElement)
-        {
-            if (documentElement == null) return;
-
-            DocumentElements.Remove(documentElement);
-        }
-
-        public virtual bool IsComposite()
-        {
-            return true;
-        }
-
+        public abstract bool IsComposite();
+        public abstract void AddDocumentElement(DocumentElement documentElement);
+        public abstract void RemoveDocumentElement(DocumentElement documentElement);
+        public abstract string GetContent(DocumentElement document);
         public abstract void Export(IDocumentExporter documentExporter);
     }
 }

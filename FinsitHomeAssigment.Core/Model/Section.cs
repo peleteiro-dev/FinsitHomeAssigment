@@ -1,5 +1,4 @@
 ﻿using FinsitHomeAssigment.Core.Exporter;
-using System.Linq;
 
 namespace FinsitHomeAssigment.Core.Model
 {
@@ -15,20 +14,6 @@ namespace FinsitHomeAssigment.Core.Model
         public override bool IsComposite()
         {
             return true;
-        }
-
-        public override void AddDocumentElement(DocumentElement documentElement)
-        {
-            if (documentElement == null) return;
-
-            DocumentElements.Add(documentElement);
-        }
-
-        public override void RemoveDocumentElement(DocumentElement documentElement)
-        {
-            if (documentElement == null) return;
-
-            DocumentElements.Remove(documentElement);
         }
 
         public override void Acept(IDocumentExporter documentExporter)

@@ -16,16 +16,6 @@ namespace FinsitHomeAssigment.Core.Model
             return false;
         }
 
-        public override void AddDocumentElement(DocumentElement documentElement)
-        {
-            // do nothing, it's a leaf, could also throw an exception
-        }
-
-        public override void RemoveDocumentElement(DocumentElement documentElement)
-        {
-            // do nothing, it's a leaf, could also throw an exception
-        }
-
         public override void Acept(IDocumentExporter documentExporter)
         {
             documentExporter.Export(this);

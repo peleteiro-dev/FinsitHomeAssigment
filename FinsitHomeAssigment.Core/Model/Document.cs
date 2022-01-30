@@ -2,7 +2,7 @@
 
 namespace FinsitHomeAssigment.Core.Model
 {
-    public class Document : DocumentElement
+    public partial class Document : DocumentElement
     {
         public override bool IsComposite()
         {

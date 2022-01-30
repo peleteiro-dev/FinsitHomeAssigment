@@ -31,19 +31,6 @@ namespace FinsitHomeAssigment.Core.Model
             DocumentElements.Remove(documentElement);
         }
 
-        public override string GetContent(DocumentElement document)
-        {
-            var exportedContent = document.OpeningTag;
-            exportedContent += Title;
-
-            exportedContent = document.DocumentElements.Aggregate(exportedContent,
-                (current, documentElement) => current + documentElement.ExportedContent);
-
-            exportedContent += document.ClosingTag;
-
-            return exportedContent;
-        }
-
         public override void Export(IDocumentExporter documentExporter)
         {
             foreach (var documentElement in DocumentElements)

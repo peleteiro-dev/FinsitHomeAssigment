@@ -26,11 +26,6 @@ namespace FinsitHomeAssigment.Core.Model
             // do nothing, it's a leaf, could also throw an exception
         }
 
-        public override string GetContent(DocumentElement document)
-        {
-            return $"{document.OpeningTag}{Content}{document.ClosingTag}";
-        }
-
         public override void Export(IDocumentExporter documentExporter)
         {
             documentExporter.Visit(this);

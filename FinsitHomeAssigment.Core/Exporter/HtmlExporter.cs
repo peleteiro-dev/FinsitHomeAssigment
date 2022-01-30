@@ -1,4 +1,5 @@
 ﻿using FinsitHomeAssigment.Core.Model;
+using System.Linq;
 
 namespace FinsitHomeAssigment.Core.Exporter
 {
@@ -16,7 +17,14 @@ namespace FinsitHomeAssigment.Core.Exporter
             document.OpeningTag = _cons.OpeningDocument;
             document.ClosingTag = _cons.ClosingDocument;
 
-            document.ExportedContent = document.GetContent(document);
+            var exportedContent = document.OpeningTag;
+
+            exportedContent = document.DocumentElements.Aggregate(exportedContent,
+                (current, documentElement) => current + documentElement.ExportedContent);
+
+            exportedContent += document.ClosingTag;
+
+            document.ExportedContent = exportedContent;
         }
 
         public void Visit(Section section)
@@ -24,7 +32,15 @@ namespace FinsitHomeAssigment.Core.Exporter
             section.OpeningTag = _cons.OpeningSection;
             section.ClosingTag = _cons.ClosingSection;
 
-            section.ExportedContent = section.GetContent(section);
+            var exportedContent = section.OpeningTag;
+            exportedContent += section.Title;
+
+            exportedContent = section.DocumentElements.Aggregate(exportedContent,
+                (current, documentElement) => current + documentElement.ExportedContent);
+
+            exportedContent += section.ClosingTag;
+
+            section.ExportedContent = exportedContent;
         }
 
         public void Visit(Paragraph paragraph)
@@ -32,7 +48,14 @@ namespace FinsitHomeAssigment.Core.Exporter
             paragraph.OpeningTag = _cons.OpeningParagraph;
             paragraph.ClosingTag = _cons.ClosingParagraph;
 
-            paragraph.ExportedContent = paragraph.GetContent(paragraph);
+            var exportedContent = paragraph.OpeningTag;
+
+            exportedContent = paragraph.DocumentElements.Aggregate(exportedContent,
+                (current, documentElement) => current + documentElement.ExportedContent);
+
+            exportedContent += paragraph.ClosingTag;
+
+            paragraph.ExportedContent = exportedContent;
         }
 
         public void Visit(Text text)
@@ -46,7 +69,7 @@ namespace FinsitHomeAssigment.Core.Exporter
         public void Visit(BoldText boldText)
         {
             boldText.OpeningTag = _cons.OpeningBoldText;
-            boldText.ClosingTag = _cons.ClosingBoldText;
+            boldText.ClosingTag = _cons.ClosingBoldText; 
 
             boldText.ExportedContent = $"{boldText.OpeningTag}{boldText.Content}{boldText.ClosingTag}";
         }

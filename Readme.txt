@@ -1,3 +1,10 @@
+Fixen todo menos o parser
+A function IsComposite usoa para determinar si se poden engadir elementos na coleccion de fillos, esa función está na clase abstracta eliminando duplicidades.
+Poderia utilizala tamen no Acept para determinar si ten fillos q teñan q aceptar o Exporter(visitor), esto eliminaría o código duplicado que hay nos Acept de todos os diferentes tipos de DocumentElement
+e tamén no Exporter, q tería un solo Export(DocumentElement), q á sua vez usaría IsComposite para determinar si ten q exportar o contido dos fillos.
+No fixen esto ainda pq tería q facer as propiedades Content e Title parte d DocumentElement e non se usan en todos os tipos...
+
+
 Overview
 The programming library should contain:
 

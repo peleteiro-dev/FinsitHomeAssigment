@@ -1,4 +1,4 @@
-﻿namespace FinsitHomeAssigment.Core.Constants
+﻿namespace FinsitHomeAssigment.Core.Exporter
 {
     public class HtmlConstants
     {

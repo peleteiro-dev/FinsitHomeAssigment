@@ -1,6 +1,5 @@
-using FinsitHomeAssigment.Core.Constants;
+using FinsitHomeAssigment.Core.Exporter;
 using FinsitHomeAssigment.Core.Model;
-using FinsitHomeAssigment.Core.Visitor;
 using Xunit;
 
 namespace FinsitHomeAssigment.Core.UnitTests.Visitor
@@ -18,7 +17,7 @@ namespace FinsitHomeAssigment.Core.UnitTests.Visitor
             var document = new Document();
             var expectedExportedContent = $"{_constants.OpeningDocument}{_constants.ClosingDocument}";
 
-            document.Accept(new HtmlVisitor(_constants));
+            document.Export(new HtmlExporter(_constants));
 
             Assert.Equal(expectedExportedContent, document.ExportedContent);
         }
@@ -33,7 +32,7 @@ namespace FinsitHomeAssigment.Core.UnitTests.Visitor
                 $"{_constants.OpeningSection}{SectionTitle}{_constants.ClosingSection}" +
                 $"{_constants.ClosingDocument}";
 
-            document.Accept(new HtmlVisitor(_constants));
+            document.Export(new HtmlExporter(_constants));
 
             Assert.Equal(expectedExportedContent, document.ExportedContent);
         }
@@ -52,7 +51,7 @@ namespace FinsitHomeAssigment.Core.UnitTests.Visitor
                 $"{_constants.ClosingSection}" +
                 $"{_constants.ClosingDocument}";
 
-            document.Accept(new HtmlVisitor(_constants));
+            document.Export(new HtmlExporter(_constants));
 
             Assert.Equal(expectedExportedContent, document.ExportedContent);
         }
@@ -67,7 +66,7 @@ namespace FinsitHomeAssigment.Core.UnitTests.Visitor
                 $"{_constants.OpeningParagraph}{_constants.ClosingParagraph}" +
                 $"{_constants.ClosingDocument}";
 
-            document.Accept(new HtmlVisitor(_constants));
+            document.Export(new HtmlExporter(_constants));
 
             Assert.Equal(expectedExportedContent, document.ExportedContent);
         }
@@ -82,7 +81,7 @@ namespace FinsitHomeAssigment.Core.UnitTests.Visitor
                 $"{_constants.OpeningText}{TestingText}{_constants.ClosingText}" +
                 $"{_constants.ClosingDocument}";
 
-            document.Accept(new HtmlVisitor(_constants));
+            document.Export(new HtmlExporter(_constants));
 
             Assert.Equal(expectedExportedContent, document.ExportedContent);
         }
@@ -97,7 +96,7 @@ namespace FinsitHomeAssigment.Core.UnitTests.Visitor
                 $"{_constants.OpeningBoldText}{TestingText}{_constants.ClosingBoldText}" +
                 $"{_constants.ClosingDocument}";
 
-            document.Accept(new HtmlVisitor(_constants));
+            document.Export(new HtmlExporter(_constants));
 
             Assert.Equal(expectedExportedContent, document.ExportedContent);
         }
@@ -122,7 +121,7 @@ namespace FinsitHomeAssigment.Core.UnitTests.Visitor
                 $"{_constants.ClosingSection}" +
                 $"{_constants.ClosingDocument}";
 
-            document.Accept(new HtmlVisitor(_constants));
+            document.Export(new HtmlExporter(_constants));
 
             Assert.Equal(expectedExportedContent, document.ExportedContent);
         }

@@ -1,14 +1,12 @@
-﻿using FinsitHomeAssigment.Core.Constants;
-using FinsitHomeAssigment.Core.Interface;
-using FinsitHomeAssigment.Core.Model;
+﻿using FinsitHomeAssigment.Core.Model;
 
-namespace FinsitHomeAssigment.Core.Visitor
+namespace FinsitHomeAssigment.Core.Exporter
 {
-    public class HtmlVisitor : IDocumentVisitor
+    public class HtmlExporter : IDocumentExporter
     {
         private HtmlConstants _cons;
 
-        public HtmlVisitor(HtmlConstants constants)
+        public HtmlExporter(HtmlConstants constants)
         {
             _cons = constants;
         }

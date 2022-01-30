@@ -1,5 +1,4 @@
-﻿using FinsitHomeAssigment.Core.Abstract;
-using FinsitHomeAssigment.Core.Interface;
+﻿using FinsitHomeAssigment.Core.Exporter;
 
 namespace FinsitHomeAssigment.Core.Model
 {
@@ -27,9 +26,9 @@ namespace FinsitHomeAssigment.Core.Model
             return false;
         }
 
-        public override void Accept(IDocumentVisitor documentVisitor)
+        public override void Export(IDocumentExporter documentExporter)
         {
-            documentVisitor.Visit(this);
+            documentExporter.Visit(this);
         }
     }
 }

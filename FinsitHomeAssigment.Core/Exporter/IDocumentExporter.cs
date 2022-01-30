@@ -1,8 +1,8 @@
 ﻿using FinsitHomeAssigment.Core.Model;
 
-namespace FinsitHomeAssigment.Core.Interface
+namespace FinsitHomeAssigment.Core.Exporter
 {
-    public interface IDocumentVisitor
+    public interface IDocumentExporter
     {
         void Visit(Document document);
         void Visit(Section section);

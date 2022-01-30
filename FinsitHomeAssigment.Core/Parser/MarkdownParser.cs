@@ -1,5 +1,4 @@
-﻿using FinsitHomeAssigment.Core.Abstract;
-using FinsitHomeAssigment.Core.Model;
+﻿using FinsitHomeAssigment.Core.Model;
 using System.Collections.Generic;
 
 namespace FinsitHomeAssigment.Core.Parser

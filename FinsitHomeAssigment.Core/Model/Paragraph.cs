@@ -1,18 +1,17 @@
-﻿using FinsitHomeAssigment.Core.Abstract;
-using FinsitHomeAssigment.Core.Interface;
+﻿using FinsitHomeAssigment.Core.Exporter;
 
 namespace FinsitHomeAssigment.Core.Model
 {
     public class Paragraph : DocumentElement
     {
-        public override void Accept(IDocumentVisitor documentVisitor)
+        public override void Export(IDocumentExporter documentExporter)
         {
             foreach (var documentElement in DocumentElements)
             {
-                documentElement.Accept(documentVisitor);
+                documentElement.Export(documentExporter);
             }
 
-            documentVisitor.Visit(this);
+            documentExporter.Visit(this);
         }
     }
 }

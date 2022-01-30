@@ -1,8 +1,8 @@
-﻿using FinsitHomeAssigment.Core.Interface;
+﻿using FinsitHomeAssigment.Core.Exporter;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace FinsitHomeAssigment.Core.Abstract
+namespace FinsitHomeAssigment.Core.Model
 {
     public abstract class DocumentElement
     {
@@ -44,6 +44,6 @@ namespace FinsitHomeAssigment.Core.Abstract
             return true;
         }
 
-        public abstract void Accept(IDocumentVisitor documentVisitor);
+        public abstract void Export(IDocumentExporter documentExporter);
     }
 }

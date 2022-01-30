@@ -15,10 +15,7 @@ namespace FinsitHomeAssigment.Core.Exporter
         public void Export(Document document)
         {
             var exportedContent = _constants.OpeningDocument;
-
-            exportedContent = document.DocumentElements.Aggregate(exportedContent,
-                (current, documentElement) => current + documentElement.ExportedContent);
-
+            exportedContent += GetChildrenContent(document);
             exportedContent += _constants.ClosingDocument;
 
             document.ExportedContent = exportedContent;
@@ -28,10 +25,7 @@ namespace FinsitHomeAssigment.Core.Exporter
         {
             var exportedContent = _constants.OpeningSection;
             exportedContent += section.Title;
-
-            exportedContent = section.DocumentElements.Aggregate(exportedContent,
-                (current, documentElement) => current + documentElement.ExportedContent);
-
+            exportedContent  += GetChildrenContent(section);
             exportedContent += _constants.ClosingSection;
 
             section.ExportedContent = exportedContent;
@@ -40,13 +34,19 @@ namespace FinsitHomeAssigment.Core.Exporter
         public void Export(Paragraph paragraph)
         {
             var exportedContent = _constants.OpeningParagraph;
-
-            exportedContent = paragraph.DocumentElements.Aggregate(exportedContent,
-                (current, documentElement) => current + documentElement.ExportedContent);
-
+            exportedContent += GetChildrenContent(paragraph);
             exportedContent += _constants.ClosingParagraph;
 
             paragraph.ExportedContent = exportedContent;
+        }
+
+        private static string GetChildrenContent(DocumentElement parent)
+        {
+            var childrenContent = string.Empty;
+            childrenContent = parent.DocumentElements.Aggregate(childrenContent,
+                            (current, documentElement) => current + documentElement.ExportedContent);
+
+            return childrenContent;
         }
 
         public void Export(Text text)

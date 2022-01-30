@@ -12,7 +12,7 @@ namespace FinsitHomeAssigment.Core.Exporter
             _constants = constants;
         }
 
-        public void Visit(Document document)
+        public void Export(Document document)
         {
             var exportedContent = _constants.OpeningDocument;
 
@@ -24,7 +24,7 @@ namespace FinsitHomeAssigment.Core.Exporter
             document.ExportedContent = exportedContent;
         }
 
-        public void Visit(Section section)
+        public void Export(Section section)
         {
             var exportedContent = _constants.OpeningSection;
             exportedContent += section.Title;
@@ -37,7 +37,7 @@ namespace FinsitHomeAssigment.Core.Exporter
             section.ExportedContent = exportedContent;
         }
 
-        public void Visit(Paragraph paragraph)
+        public void Export(Paragraph paragraph)
         {
             var exportedContent = _constants.OpeningParagraph;
 
@@ -49,12 +49,12 @@ namespace FinsitHomeAssigment.Core.Exporter
             paragraph.ExportedContent = exportedContent;
         }
 
-        public void Visit(Text text)
+        public void Export(Text text)
         {
            text.ExportedContent = $"{_constants.OpeningText}{text.Content}{_constants.ClosingText}";
         }
 
-        public void Visit(BoldText boldText)
+        public void Export(BoldText boldText)
         {
             boldText.ExportedContent = $"{_constants.OpeningBoldText}{boldText.Content}{_constants.ClosingBoldText}";
         }

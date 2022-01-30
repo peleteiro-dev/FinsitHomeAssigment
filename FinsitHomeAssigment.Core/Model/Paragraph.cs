@@ -24,14 +24,14 @@ namespace FinsitHomeAssigment.Core.Model
             DocumentElements.Remove(documentElement);
         }
 
-        public override void Export(IDocumentExporter documentExporter)
+        public override void Acept(IDocumentExporter documentExporter)
         {
             foreach (var documentElement in DocumentElements)
             {
-                documentElement.Export(documentExporter);
+                documentElement.Acept(documentExporter);
             }
 
-            documentExporter.Visit(this);
+            documentExporter.Export(this);
         }
     }
 }

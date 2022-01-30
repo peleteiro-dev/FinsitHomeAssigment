@@ -2,28 +2,28 @@ using FinsitHomeAssigment.Core.Exporter;
 using FinsitHomeAssigment.Core.Model;
 using Xunit;
 
-namespace FinsitHomeAssigment.Core.UnitTests.Visitor
+namespace FinsitHomeAssigment.Core.UnitTests.Exporter
 {
-    public class HtmlVisitorTests
+    public class HtmlExporterTests
     {
-        private static HtmlConstants _constants = new HtmlConstants();
+        private readonly HtmlConstants _constants = new HtmlConstants();
         private const string SectionTitle = "section";
         private const string NestedSectionTitle = "nested section";
         private const string TestingText = "testing";
 
         [Fact]
-        public void HtmlVisitor_ShouldExportAnEmptyDocument()
+        public void HtmlExporter_ShouldExportAnEmptyDocument()
         {
             var document = new Document();
             var expectedExportedContent = $"{_constants.OpeningDocument}{_constants.ClosingDocument}";
 
-            document.Export(new HtmlExporter(_constants));
+            document.Acept(new HtmlExporter(_constants));
 
             Assert.Equal(expectedExportedContent, document.ExportedContent);
         }
 
         [Fact]
-        public void HtmlVisitor_ShouldExportADocument_WithAnEmptySection()
+        public void HtmlExporter_ShouldExportADocument_WithAnEmptySection()
         {
             var document = new Document();
             document.AddDocumentElement(new Section(SectionTitle));
@@ -32,13 +32,13 @@ namespace FinsitHomeAssigment.Core.UnitTests.Visitor
                 $"{_constants.OpeningSection}{SectionTitle}{_constants.ClosingSection}" +
                 $"{_constants.ClosingDocument}";
 
-            document.Export(new HtmlExporter(_constants));
+            document.Acept(new HtmlExporter(_constants));
 
             Assert.Equal(expectedExportedContent, document.ExportedContent);
         }
 
         [Fact]
-        public void HtmlVisitor_ShouldExportADocument_WithANestedEmptySection()
+        public void HtmlExporter_ShouldExportADocument_WithANestedEmptySection()
         {
             var document = new Document();
             var section = new Section(SectionTitle);
@@ -51,13 +51,13 @@ namespace FinsitHomeAssigment.Core.UnitTests.Visitor
                 $"{_constants.ClosingSection}" +
                 $"{_constants.ClosingDocument}";
 
-            document.Export(new HtmlExporter(_constants));
+            document.Acept(new HtmlExporter(_constants));
 
             Assert.Equal(expectedExportedContent, document.ExportedContent);
         }
 
         [Fact]
-        public void HtmlVisitor_ShouldExportADocument_WithAnEmptyParagraph()
+        public void HtmlExporter_ShouldExportADocument_WithAnEmptyParagraph()
         {
             var document = new Document();
             document.AddDocumentElement(new Paragraph());
@@ -66,13 +66,13 @@ namespace FinsitHomeAssigment.Core.UnitTests.Visitor
                 $"{_constants.OpeningParagraph}{_constants.ClosingParagraph}" +
                 $"{_constants.ClosingDocument}";
 
-            document.Export(new HtmlExporter(_constants));
+            document.Acept(new HtmlExporter(_constants));
 
             Assert.Equal(expectedExportedContent, document.ExportedContent);
         }
 
         [Fact]
-        public void HtmlVisitor_ShouldExportADocument_WithAText()
+        public void HtmlExporter_ShouldExportADocument_WithAText()
         {
             var document = new Document();
             document.AddDocumentElement(new Text(TestingText));
@@ -81,13 +81,13 @@ namespace FinsitHomeAssigment.Core.UnitTests.Visitor
                 $"{_constants.OpeningText}{TestingText}{_constants.ClosingText}" +
                 $"{_constants.ClosingDocument}";
 
-            document.Export(new HtmlExporter(_constants));
+            document.Acept(new HtmlExporter(_constants));
 
             Assert.Equal(expectedExportedContent, document.ExportedContent);
         }
 
         [Fact]
-        public void HtmlVisitor_ShouldExportADocument_WithABoldText()
+        public void HtmlExporter_ShouldExportADocument_WithABoldText()
         {
             var document = new Document();
             document.AddDocumentElement(new BoldText(TestingText));
@@ -96,13 +96,13 @@ namespace FinsitHomeAssigment.Core.UnitTests.Visitor
                 $"{_constants.OpeningBoldText}{TestingText}{_constants.ClosingBoldText}" +
                 $"{_constants.ClosingDocument}";
 
-            document.Export(new HtmlExporter(_constants));
+            document.Acept(new HtmlExporter(_constants));
 
             Assert.Equal(expectedExportedContent, document.ExportedContent);
         }
 
         [Fact]
-        public void HtmlVisitor_ShouldExportADocument_WithSectionParagraphTextAndBoldText()
+        public void HtmlExporter_ShouldExportADocument_WithSectionParagraphTextAndBoldText()
         {
             var document = new Document();
             var paragraph = new Paragraph();
@@ -121,7 +121,7 @@ namespace FinsitHomeAssigment.Core.UnitTests.Visitor
                 $"{_constants.ClosingSection}" +
                 $"{_constants.ClosingDocument}";
 
-            document.Export(new HtmlExporter(_constants));
+            document.Acept(new HtmlExporter(_constants));
 
             Assert.Equal(expectedExportedContent, document.ExportedContent);
         }

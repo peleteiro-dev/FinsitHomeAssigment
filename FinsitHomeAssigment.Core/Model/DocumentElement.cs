@@ -11,6 +11,6 @@ namespace FinsitHomeAssigment.Core.Model
         public abstract bool IsComposite();
         public abstract void AddDocumentElement(DocumentElement documentElement);
         public abstract void RemoveDocumentElement(DocumentElement documentElement);
-        public abstract void Export(IDocumentExporter documentExporter);
+        public abstract void Acept(IDocumentExporter documentExporter);
     }
 }

@@ -4,10 +4,10 @@ namespace FinsitHomeAssigment.Core.Exporter
 {
     public interface IDocumentExporter
     {
-        void Visit(Document document);
-        void Visit(Section section);
-        void Visit(Paragraph paragraph);
-        void Visit(Text text);
-        void Visit(BoldText boldText);
+        void Export(Document document);
+        void Export(Section section);
+        void Export(Paragraph paragraph);
+        void Export(Text text);
+        void Export(BoldText boldText);
     }
 }

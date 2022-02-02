@@ -1,12 +1,12 @@
 ﻿using FinsitHomeAssigment.Core.Model;
 
-namespace FinsitHomeAssigment.Core.Parser
+namespace FinsitHomeAssigment.Core.Factory
 {
     public class SectionFactory : IDocumentElementFactory
     {
         public DocumentElement Create(string line)
         {
-            return new Section(line);
+            return  line.StartsWith("# ") ? new Section(line) :  null;
         }
     }
 }

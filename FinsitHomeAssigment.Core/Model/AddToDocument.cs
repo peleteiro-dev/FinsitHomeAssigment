@@ -1,4 +1,6 @@
-﻿namespace FinsitHomeAssigment.Core.Model
+﻿using System.Collections.Generic;
+
+namespace FinsitHomeAssigment.Core.Model
 {
     public partial class Document
     {
@@ -10,27 +12,36 @@
             _currentDocumentElement = this;
         }
 
-        public void AddToDocument(DocumentType documentType, DocumentElement documentElement)
+        public void AddToDocument(IEnumerable<DocumentElement> documentElements)
         {
+            foreach (var documentElement in documentElements)
+            {
+                AddToDocument(documentElement);
+            }
+        }
+
+        public void AddToDocument(DocumentElement documentElement)
+        {
+            var documentType = documentElement.GetType().Name;
             switch (documentType)
             {
-                case DocumentType.Section:
+                case nameof(Section):
                     AddDocumentElement(documentElement);
                     _currentDocumentElement = documentElement;
                     break;
-                case DocumentType.SubSection:
+                case nameof(SubSection):
                     _currentDocumentElement.AddDocumentElement(documentElement);
                     _currentDocumentElement = documentElement;
                     break;
-                case DocumentType.Paragraph:
+                case nameof(Paragraph):
                     if (_paragraph.DocumentElements.Count > 0)
                         _currentDocumentElement.AddDocumentElement(_paragraph);
                     _paragraph = (Paragraph)documentElement;
                     break;
-                case DocumentType.Text:
+                case nameof(Text):
                     _paragraph.AddDocumentElement(documentElement);
                     break;
-                case DocumentType.BoldText:
+                case nameof(BoldText):
                     _paragraph.AddDocumentElement(documentElement);
                     break;
             }

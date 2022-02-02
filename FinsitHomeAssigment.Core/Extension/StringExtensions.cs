@@ -1,40 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using FinsitHomeAssigment.Core.Model;
 
 namespace FinsitHomeAssigment.Core.Extension
 {
     public static class StringExtensions
     {
-        public static DocumentType ToDocumentElementType(this string line)
-        {
-            DocumentType documentType;
-
-            if (line.StartsWith("# "))
-            {
-                documentType = DocumentType.Section;
-            }
-            else if (line.StartsWith("## "))
-            {
-                documentType = DocumentType.SubSection;
-            }
-            else if (line.StartsWith("**"))
-            {
-                documentType = DocumentType.BoldText;
-            }
-            else if (string.IsNullOrEmpty(line))
-            {
-                documentType = DocumentType.Paragraph;
-            }
-            else
-            {
-                documentType = DocumentType.Text;
-            }
-
-            return documentType;
-        }
-
         public static List<string> ToListOfTextItems(this string line)
         {
             if (string.IsNullOrEmpty(line)) return null;

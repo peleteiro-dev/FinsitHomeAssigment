@@ -31,6 +31,16 @@ namespace FinsitHomeAssigment.Core.Exporter
             section.ExportedContent = exportedContent;
         }
 
+        public void Export(SubSection subSection)
+        {
+            var exportedContent = _constants.OpeningSection;
+            exportedContent += subSection.Title;
+            exportedContent += GetChildrenContent(subSection);
+            exportedContent += _constants.ClosingSection;
+
+            subSection.ExportedContent = exportedContent;
+        }
+
         public void Export(Paragraph paragraph)
         {
             var exportedContent = _constants.OpeningParagraph;

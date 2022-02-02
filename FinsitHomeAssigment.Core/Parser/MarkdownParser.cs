@@ -1,37 +1,34 @@
-﻿using FinsitHomeAssigment.Core.Extension;
-using FinsitHomeAssigment.Core.Model;
+﻿using FinsitHomeAssigment.Core.Model;
 using System.Collections.Generic;
 
 namespace FinsitHomeAssigment.Core.Parser
 {
-    public class MarkdownParser
+    public class MarkdownParser : AbstractParser
     {
-        public Document Document { get; private set; }
+        private readonly TextLineParser _textLineParser;
 
-        private readonly Dictionary<DocumentType, IDocumentElementFactory> _documentElementFactories = new Dictionary<DocumentType, IDocumentElementFactory>
-            {
-                { DocumentType.Paragraph, new ParagraphFactory() },
-                { DocumentType.Section, new SectionFactory() },
-                { DocumentType.SubSection, new SectionFactory() },
-                { DocumentType.Text, new TextFactory() },
-                { DocumentType.BoldText, new BoldTextFactory() }
-            };
+        public MarkdownParser(TextLineParser textLineParser)
+        {
+            _textLineParser = textLineParser;
+        }
 
         public Document Parse(IList<string> lines)
         {
-            Document = new Document();
-
+            var document = new Document();
             foreach (var line in lines)
             {
-                var documentType = line.ToDocumentElementType();
+                var documentElement = CreateDocumentElement(line);
+                if (documentElement != null)
+                {
+                    document.AddToDocument(documentElement);
+                    continue;
+                }
 
-                var factory = _documentElementFactories[documentType];
-                var documentElement = factory.Create(line);
-
-                Document.AddToDocument(documentType, documentElement);
+                var textItems = _textLineParser.Parse(line);
+                document.AddToDocument(textItems);
             }
 
-            return Document;
+            return document;
         }
     }
 }

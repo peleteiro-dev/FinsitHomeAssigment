@@ -16,7 +16,7 @@ namespace FinsitHomeAssigment.Core.Model
             return false;
         }
 
-        public override void Acept(IDocumentExporter documentExporter)
+        public override void Accept(IDocumentExporter documentExporter)
         {
             documentExporter.Export(this);
         }

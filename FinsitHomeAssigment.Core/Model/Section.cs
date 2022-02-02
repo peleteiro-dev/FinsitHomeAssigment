@@ -16,11 +16,11 @@ namespace FinsitHomeAssigment.Core.Model
             return true;
         }
 
-        public override void Acept(IDocumentExporter documentExporter)
+        public override void Accept(IDocumentExporter documentExporter)
         {
             foreach (var documentElement in DocumentElements)
             {
-                documentElement.Acept(documentExporter);
+                documentElement.Accept(documentExporter);
             }
 
             documentExporter.Export(this);

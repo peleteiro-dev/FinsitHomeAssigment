@@ -9,7 +9,7 @@ namespace FinsitHomeAssigment.Core.Model
         public IList<DocumentElement> DocumentElements { get; set; } = new List<DocumentElement>();
 
         public abstract bool IsComposite();
-        public abstract void Acept(IDocumentExporter documentExporter);
+        public abstract void Accept(IDocumentExporter documentExporter);
         
         public void AddDocumentElement(DocumentElement documentElement)
         {

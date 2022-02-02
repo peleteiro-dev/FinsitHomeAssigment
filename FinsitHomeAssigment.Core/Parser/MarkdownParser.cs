@@ -8,7 +8,7 @@ namespace FinsitHomeAssigment.Core.Parser
     {
         public Document Document { get; private set; }
 
-        private readonly Dictionary<DocumentType, IDocumentElementFactory> DocumentElementFactories = new Dictionary<DocumentType, IDocumentElementFactory>
+        private readonly Dictionary<DocumentType, IDocumentElementFactory> _documentElementFactories = new Dictionary<DocumentType, IDocumentElementFactory>
             {
                 { DocumentType.Paragraph, new ParagraphFactory() },
                 { DocumentType.Section, new SectionFactory() },
@@ -24,7 +24,8 @@ namespace FinsitHomeAssigment.Core.Parser
             foreach (var line in lines)
             {
                 var documentType = line.ToDocumentElementType();
-                var factory = DocumentElementFactories[documentType];
+
+                var factory = _documentElementFactories[documentType];
                 var documentElement = factory.Create(line);
 
                 Document.AddToDocument(documentType, documentElement);

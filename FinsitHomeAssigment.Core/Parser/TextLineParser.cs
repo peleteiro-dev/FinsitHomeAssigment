@@ -2,31 +2,47 @@
 using FinsitHomeAssigment.Core.Model;
 using System.Collections.Generic;
 using System.Linq;
+using FinsitHomeAssigment.Core.Factory;
 
 namespace FinsitHomeAssigment.Core.Parser
 {
     public class TextLineParser : AbstractParser
     {
-        public List<DocumentElement> Parse(string line)
+        public TextLineParser()
+        {
+            Factories.Add(new BoldTextFactory());
+            Factories.Add(new TextFactory());
+        }
+
+        public IList<DocumentElement> Parse(string line)
         {
             var documentElements = new List<DocumentElement>();
             if (string.IsNullOrEmpty(line)) return documentElements;
 
-            var delimiters = Factories
-                .Select(f => f.Delimiter)
-                .Where(d=>!string.IsNullOrEmpty(d))
-                .ToList();
+            var delimiters = GetDelimiters();
             var textItems = line.ToListOfTextItems(delimiters);
+            ConvertTextItemsAndAddToDocumentElements(textItems, documentElements);
+
+            return documentElements;
+        }
+
+        private IList<string> GetDelimiters()
+        {
+            return Factories
+                .Select(f => f.Delimiter)
+                .Where(d => !string.IsNullOrEmpty(d))
+                .ToList();
+        }
+
+        private void ConvertTextItemsAndAddToDocumentElements(IList<string> textItems, IList<DocumentElement> documentElements)
+        {
             foreach (var textItem in textItems)
             {
                 var documentElement = CreateDocumentElement(textItem);
-                if (documentElement != null)
-                {
-                    documentElements.Add(documentElement);
-                }
-            }
+                if (documentElement == null) continue;
 
-            return documentElements;
+                documentElements.Add(documentElement);
+            }
         }
     }
 }

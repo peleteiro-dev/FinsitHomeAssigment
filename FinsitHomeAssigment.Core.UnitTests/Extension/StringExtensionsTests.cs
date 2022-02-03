@@ -88,9 +88,22 @@ namespace FinsitHomeAssigment.Core.UnitTests.Extension
         [Fact]
         public void WhenInputDoesNotContainsDelimiter_ToListOfTextItems_ShouldReturnOneItem()
         {
-            const string lineToSplit = "Some **(bold) introduction** to Section 1.";
-            var delimiters = new List<string> { "++" };
+            const string lineToSplit = "Some ++(bold) introduction++ to Section 1.";
+            var delimiters = new List<string> { "**" };
             var expectedOutput = new List<string> { $"{lineToSplit}\n" };
+
+            var splitLine = lineToSplit.ToListOfTextItems(delimiters);
+
+            var equal = expectedOutput.SequenceEqual(splitLine);
+            Assert.True((equal));
+        }
+
+        [Fact]
+        public void WhenInputContainsOnlyOneDelimiter_ToListOfTextItems_ShouldReturnOneItem()
+        {
+            const string lineToSplit = "Some **(bold) introduction to Section 1.";
+            var delimiters = new List<string> { "**" };
+            var expectedOutput = new List<string> { "Some ", "**(bold) introduction to Section 1.\n" };
 
             var splitLine = lineToSplit.ToListOfTextItems(delimiters);
 

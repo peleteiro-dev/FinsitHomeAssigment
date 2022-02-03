@@ -1,4 +1,5 @@
-﻿using FinsitHomeAssigment.Core.Exporter;
+﻿using System.Linq;
+using FinsitHomeAssigment.Core.Exporter;
 
 namespace FinsitHomeAssigment.Core.Model
 {
@@ -17,6 +18,14 @@ namespace FinsitHomeAssigment.Core.Model
             }
 
             documentExporter.Export(this);
+        }
+
+        public override bool Equals(DocumentElement other)
+        {
+            if (other == null || !(other is Paragraph otherParagraph)) return false;
+
+            return DocumentElements.SequenceEqual(otherParagraph.DocumentElements) &&
+                   IsComposite() == otherParagraph.IsComposite();
         }
     }
 }

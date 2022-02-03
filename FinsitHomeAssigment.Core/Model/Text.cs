@@ -20,5 +20,14 @@ namespace FinsitHomeAssigment.Core.Model
         {
             documentExporter.Export(this);
         }
+
+        public override bool Equals(DocumentElement other)
+        {
+            if (other == null || !(other is Text otherText)) return false;
+
+            return Content == otherText.Content &&
+                   IsComposite() == otherText.IsComposite();
+        }
     }
 }
+

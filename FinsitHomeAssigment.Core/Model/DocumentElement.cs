@@ -1,9 +1,10 @@
-﻿using FinsitHomeAssigment.Core.Exporter;
+﻿using System;
+using FinsitHomeAssigment.Core.Exporter;
 using System.Collections.Generic;
 
 namespace FinsitHomeAssigment.Core.Model
 {
-    public abstract class DocumentElement
+    public abstract class DocumentElement : IEquatable<DocumentElement>
     {
         public string ExportedContent { get; set; }
         public IList<DocumentElement> DocumentElements { get; set; } = new List<DocumentElement>();
@@ -17,5 +18,7 @@ namespace FinsitHomeAssigment.Core.Model
 
             DocumentElements.Add(documentElement);
         }
+
+        public abstract bool Equals(DocumentElement other);
     }
 }

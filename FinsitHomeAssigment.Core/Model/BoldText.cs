@@ -20,5 +20,13 @@ namespace FinsitHomeAssigment.Core.Model
         {
             documentExporter.Export(this);
         }
+
+        public override bool Equals(DocumentElement other)
+        {
+            if (other == null || !(other is BoldText otherBoldText)) return false;
+
+            return Content == otherBoldText.Content &&
+                   IsComposite() == otherBoldText.IsComposite();
+        }
     }
 }

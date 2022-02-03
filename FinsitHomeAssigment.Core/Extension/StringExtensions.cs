@@ -6,32 +6,24 @@ namespace FinsitHomeAssigment.Core.Extension
 {
     public static class StringExtensions
     {
-        public static List<string> ToListOfTextItems(this string line, IList<string> delimiters)
+        public static IList<string> ToListOfTextItems(this string line, IList<string> delimiters)
         {
             var textItems = new List<string>();
             if (string.IsNullOrEmpty(line)) return textItems;
 
-            var parts = SplitLine(line, delimiters);
-            for (var i = 0; i < parts.Count; i++)
-            {
-                if (delimiters.Contains(parts[i]))
-                {
-                    textItems.Add($"{parts[i]}{parts[i + 1]}");
-                    i += 2; 
-                    continue;
-                };
-                textItems.Add(parts[i]);
-            }
-
+            var splits = SplitLine(line, delimiters);
+            textItems = ConvertSplitsToList(splits, delimiters);
+            AddNewLineToLastItem(textItems);
+            
             return textItems;
         }
 
-        private static IList<string> SplitLine(string line, ICollection<string> delimiters)
+        private static IList<string> SplitLine(string line, IList<string> delimiters)
         {
             var divided = new List<string>();
             if (delimiters.Count < 1)
             {
-                divided.Add(line); 
+                divided.Add(line);
                 return divided;
             }
 
@@ -42,6 +34,34 @@ namespace FinsitHomeAssigment.Core.Extension
             divided = Regex.Split(line, pattern).ToList();
 
             return divided;
+        }
+
+        private static List<string> ConvertSplitsToList(IList<string> splits, IList<string> delimiters)
+        {
+            var textItems = new List<string>();
+            for (var i = 0; i < splits.Count; i++)
+            {
+                if (delimiters.Contains(splits[i]))
+                {
+                    textItems.Add($"{splits[i]}{splits[i + 1]}");
+                    i += 2;
+                    continue;
+                }
+
+                if (!string.IsNullOrEmpty(splits[i]))
+                    textItems.Add(splits[i]);
+            }
+
+            return textItems;
+        }
+
+        private static void AddNewLineToLastItem(IList<string> list)
+        {
+            const string newLine = "\n";
+            var lastItem = list.Last();
+            if (lastItem.Contains(newLine)) return;
+
+            list[list.Count - 1] = lastItem + newLine;
         }
     }
 }

@@ -11,6 +11,7 @@ namespace FinsitHomeAssigment.Core.Model
 
         public abstract bool IsComposite();
         public abstract void Accept(IDocumentExporter documentExporter);
+        public abstract bool Equals(DocumentElement other);
         
         public void AddDocumentElement(DocumentElement documentElement)
         {
@@ -18,7 +19,5 @@ namespace FinsitHomeAssigment.Core.Model
 
             DocumentElements.Add(documentElement);
         }
-
-        public abstract bool Equals(DocumentElement other);
     }
 }

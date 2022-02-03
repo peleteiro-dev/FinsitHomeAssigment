@@ -4,9 +4,11 @@ namespace FinsitHomeAssigment.Core.Factory
 {
     public class ParagraphFactory : IDocumentElementFactory
     {
+        public string Delimiter { get; set; } = string.Empty;
+
         public DocumentElement Create(string line)
         {
-            return string.IsNullOrEmpty(line) ? new Paragraph() : null;
+            return line == Delimiter ? new Paragraph() : null;
         }
     }
 }

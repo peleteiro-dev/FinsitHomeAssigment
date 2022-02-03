@@ -4,10 +4,12 @@ namespace FinsitHomeAssigment.Core.Factory
 {
     public class BoldTextFactory : IDocumentElementFactory
     {
+        public string Delimiter { get; set; } = "**";
+
         public DocumentElement Create(string line)
         {
-            return line.StartsWith("** ") 
-                ? new BoldText(line.Replace("** ", "")) 
+            return line.StartsWith(Delimiter) 
+                ? new BoldText(line.Replace(Delimiter, "")) 
                 : null;
         }
     }

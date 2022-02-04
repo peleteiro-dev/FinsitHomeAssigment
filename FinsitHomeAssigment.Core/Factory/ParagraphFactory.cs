@@ -4,7 +4,7 @@ namespace FinsitHomeAssigment.Core.Factory
 {
     public class ParagraphFactory : IDocumentElementFactory
     {
-        public string Delimiter { get; set; } = string.Empty;
+        public string Delimiter { get; set; } = Constant.ParagraphDelimiter;
 
         public DocumentElement Create(string line)
         {

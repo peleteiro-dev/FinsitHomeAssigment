@@ -76,7 +76,7 @@ namespace FinsitHomeAssigment.Core.UnitTests.Parser
         }
 
         [Fact]
-        public void HappyCase()
+        public void RequiredCase()
         {
             const string testCaseFile = "RequiredText.txt";
             Setup(testCaseFile);

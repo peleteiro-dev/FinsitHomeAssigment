@@ -10,8 +10,8 @@ namespace FinsitHomeAssigment.Core.Parser
     {
         public TextLineParser()
         {
-            Factories.Add(new BoldTextFactory());
-            Factories.Add(new TextFactory());
+            AddFactory(new BoldTextFactory());
+            AddFactory(new TextFactory());
         }
 
         public IList<DocumentElement> Parse(string line)
@@ -21,21 +21,23 @@ namespace FinsitHomeAssigment.Core.Parser
 
             var delimiters = GetDelimiters();
             var textItems = line.ToListOfTextItems(delimiters);
-            ConvertTextItemsAndAddToDocumentElements(textItems, documentElements);
+            var converted = ConvertTextItems(textItems );
+            documentElements.AddRange(converted);
 
             return documentElements;
         }
 
         private IList<string> GetDelimiters()
         {
-            return Factories
+            return GetFactories()
                 .Select(f => f.Delimiter)
                 .Where(d => !string.IsNullOrEmpty(d))
                 .ToList();
         }
 
-        private void ConvertTextItemsAndAddToDocumentElements(IList<string> textItems, IList<DocumentElement> documentElements)
+        private IEnumerable<DocumentElement> ConvertTextItems(IList<string> textItems)
         {
+            var documentElements = new List<DocumentElement>();
             foreach (var textItem in textItems)
             {
                 var documentElement = CreateDocumentElement(textItem);
@@ -43,6 +45,8 @@ namespace FinsitHomeAssigment.Core.Parser
 
                 documentElements.Add(documentElement);
             }
+
+            return documentElements;
         }
     }
 }

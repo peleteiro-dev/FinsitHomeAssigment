@@ -46,5 +46,13 @@ namespace FinsitHomeAssigment.Core.Model
                     break;
             }
         }
+
+        public void Close()
+        {
+            if (_paragraph.DocumentElements.Count > 0)
+            {
+                _currentDocumentElement.AddDocumentElement(_paragraph);
+            }
+        }
     }
 }

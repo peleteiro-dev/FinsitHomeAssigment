@@ -23,4 +23,16 @@
     <ProjectReference Include="..\FinsitHomeAssigment.Core\FinsitHomeAssigment.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Files\OneSectionAndOneLineParagraph.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Files\RequiredText.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Files\SectionWithNestedSubsections.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

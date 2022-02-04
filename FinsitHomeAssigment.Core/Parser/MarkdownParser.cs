@@ -1,5 +1,7 @@
-﻿using FinsitHomeAssigment.Core.Model;
+﻿using System;
+using FinsitHomeAssigment.Core.Model;
 using System.Collections.Generic;
+using FinsitHomeAssigment.Core.Factory;
 
 namespace FinsitHomeAssigment.Core.Parser
 {
@@ -9,10 +11,14 @@ namespace FinsitHomeAssigment.Core.Parser
 
         public MarkdownParser(TextLineParser textLineParser)
         {
-            _textLineParser = textLineParser;
+            _textLineParser = textLineParser ?? throw new ArgumentNullException(nameof(textLineParser));
+
+            AddFactory(new SectionFactory());
+            AddFactory(new SubSectionFactory());
+            AddFactory(new ParagraphFactory());
         }
 
-        public Document Parse(IList<string> lines)
+        public Document Parse(IEnumerable<string> lines)
         {
             var document = new Document();
             foreach (var line in lines)
@@ -27,6 +33,7 @@ namespace FinsitHomeAssigment.Core.Parser
                 var textItems = _textLineParser.Parse(line);
                 document.AddToDocument(textItems);
             }
+            document.Close();
 
             return document;
         }

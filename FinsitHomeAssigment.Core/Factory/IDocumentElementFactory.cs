@@ -4,7 +4,7 @@ namespace FinsitHomeAssigment.Core.Factory
 {
     public interface IDocumentElementFactory
     {
-        string Delimiter { get; set; }
+        string Delimiter { get; }
         DocumentElement Create(string line);
     }
 }

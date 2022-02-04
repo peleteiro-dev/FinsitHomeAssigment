@@ -5,7 +5,7 @@ namespace FinsitHomeAssigment.Core.Factory
 {
     public class TextFactory : IDocumentElementFactory
     {
-        public string Delimiter { get; set; } = null;
+        public string Delimiter => null;
 
         public DocumentElement Create(string line)
         {

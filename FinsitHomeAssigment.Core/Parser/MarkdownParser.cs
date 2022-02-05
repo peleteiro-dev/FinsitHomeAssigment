@@ -1,6 +1,7 @@
 ﻿using System;
 using FinsitHomeAssigment.Core.Model;
 using System.Collections.Generic;
+using FinsitHomeAssigment.Core.Builder;
 using FinsitHomeAssigment.Core.Factory;
 
 namespace FinsitHomeAssigment.Core.Parser
@@ -20,7 +21,7 @@ namespace FinsitHomeAssigment.Core.Parser
 
         public Document Parse(IEnumerable<string> lines)
         {
-            var document = new Document();
+            var document = new DocumentBuilder();
             foreach (var line in lines)
             {
                 var documentElement = CreateDocumentElement(line);
@@ -35,7 +36,7 @@ namespace FinsitHomeAssigment.Core.Parser
             }
             document.Close();
 
-            return document;
+            return document.Document;
         }
     }
 }

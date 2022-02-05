@@ -83,12 +83,12 @@ namespace FinsitHomeAssigment.Core.UnitTests.Parser
 
             var parsedText = _markdownParser.Parse(_textToParse);
 
-            _expectedOutput.AddToDocument(_section1);
+            _expectedOutput.AddDocumentElement(_section1);
             _section1.AddDocumentElement(_paragraph1);
             _section1.AddDocumentElement(_subSection1);
             _subSection1.AddDocumentElement(_paragraph2);
             _subSection1.AddDocumentElement(_paragraph3);
-            _expectedOutput.AddToDocument(_section2);
+            _expectedOutput.AddDocumentElement(_section2);
             _section2.AddDocumentElement(_section2Paragraph1);
             _section2.AddDocumentElement(_section2Paragraph2);
 
@@ -104,7 +104,7 @@ namespace FinsitHomeAssigment.Core.UnitTests.Parser
 
             var parsedText = _markdownParser.Parse(_textToParse);
 
-            _expectedOutput.AddToDocument(_section1);
+            _expectedOutput.AddDocumentElement(_section1);
             _section1.AddDocumentElement(_oneLineParagraph);
             var equal = _expectedOutput.Equals(parsedText);
             Assert.True(equal);

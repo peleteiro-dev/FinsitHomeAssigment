@@ -5,13 +5,19 @@ namespace FinsitHomeAssigment.Core.Builder
 {
     public class DocumentBuilder
     {
-        public Document Document = new Document();
+        private readonly Document _document = new Document();
         private DocumentElement _currentDocumentElement;
         private Paragraph _paragraph = new Paragraph();
 
         public DocumentBuilder()
         {
-            _currentDocumentElement = Document;
+            _currentDocumentElement = _document;
+        }
+
+        public Document GetDocument()
+        {
+            Close();
+            return _document;
         }
 
         public void AddToDocument(IEnumerable<DocumentElement> documentElements)
@@ -46,7 +52,7 @@ namespace FinsitHomeAssigment.Core.Builder
 
         private void AddToDocument(Section section)
         {
-            Document.AddDocumentElement(section);
+            _document.AddDocumentElement(section);
             _currentDocumentElement = section;
         }
 
@@ -73,7 +79,7 @@ namespace FinsitHomeAssigment.Core.Builder
             _paragraph.AddDocumentElement(boldText);
         }
 
-        public void Close()
+        private void Close()
         {
             if (_paragraph.DocumentElements.Count > 0)
             {

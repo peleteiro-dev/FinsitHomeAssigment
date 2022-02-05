@@ -34,9 +34,8 @@ namespace FinsitHomeAssigment.Core.Parser
                 var textItems = _textLineParser.Parse(line);
                 document.AddToDocument(textItems);
             }
-            document.Close();
 
-            return document.Document;
+            return document.GetDocument();
         }
     }
 }

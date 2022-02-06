@@ -3,14 +3,9 @@ using System.Linq;
 
 namespace FinsitHomeAssigment.Core.Exporter
 {
-    public class DocumentExporter : IDocumentExporter
+    public class HtmlExporter : IDocumentExporter
     {
-        private readonly IDocumentTags _tags;
-
-        public DocumentExporter(IDocumentTags tags)
-        {
-            _tags = tags;
-        }
+        private readonly IDocumentTags _tags = new HtmlTags();
 
         public IDocumentTags GetTags() => _tags;
 
@@ -19,7 +14,7 @@ namespace FinsitHomeAssigment.Core.Exporter
             var exportedContent = _tags.OpeningDocument();
             exportedContent += GetChildrenContent(document);
             exportedContent += _tags.ClosingDocument();
-            
+
             document.ExportedContent = exportedContent;
         }
 
@@ -27,7 +22,6 @@ namespace FinsitHomeAssigment.Core.Exporter
         {
             var exportedContent = _tags.OpeningSection();
             exportedContent += section.Title;
-            exportedContent += _tags.SectionSeparator();
             exportedContent += GetChildrenContent(section);
             exportedContent += _tags.ClosingSection();
 
@@ -38,7 +32,6 @@ namespace FinsitHomeAssigment.Core.Exporter
         {
             var exportedContent = _tags.OpeningSubSection();
             exportedContent += subSection.Title;
-            exportedContent += _tags.SubSectionSeparator();
             exportedContent += GetChildrenContent(subSection);
             exportedContent += _tags.ClosingSubSection();
 
@@ -50,7 +43,6 @@ namespace FinsitHomeAssigment.Core.Exporter
             var exportedContent = _tags.OpeningParagraph();
             exportedContent += GetChildrenContent(paragraph);
             exportedContent += _tags.ClosingParagraph();
-            exportedContent += _tags.ParagraphSeparator();
 
             paragraph.ExportedContent = exportedContent;
         }

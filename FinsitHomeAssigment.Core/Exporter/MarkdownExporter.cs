@@ -4,9 +4,9 @@ using System.Linq;
 
 namespace FinsitHomeAssigment.Core.Exporter
 {
-    public class MediawikiExporter : IDocumentExporter
+    public class MarkdownExporter : IDocumentExporter
     {
-        private readonly IDocumentTags _tags = new MediawikiTags();
+        private readonly IDocumentTags _tags = new MarkdownTags();
 
         public IDocumentTags GetTags() => _tags;
 
@@ -15,16 +15,17 @@ namespace FinsitHomeAssigment.Core.Exporter
             var exportedContent = _tags.OpeningDocument();
             exportedContent += GetChildrenContent(document);
             exportedContent += _tags.ClosingDocument();
-
+            
             document.ExportedContent = exportedContent;
         }
 
         public void Export(Section section)
         {
             var exportedContent = _tags.OpeningSection();
-            exportedContent += BuildTitle(section.Title, _tags.ClosingSection());
+            exportedContent += section.Title;
             exportedContent += Environment.NewLine;
             exportedContent += GetChildrenContent(section);
+            exportedContent += _tags.ClosingSection();
 
             section.ExportedContent = exportedContent;
         }
@@ -32,9 +33,10 @@ namespace FinsitHomeAssigment.Core.Exporter
         public void Export(SubSection subSection)
         {
             var exportedContent = _tags.OpeningSubSection();
-            exportedContent += BuildTitle(subSection.Title, _tags.ClosingSubSection()); ;
+            exportedContent += subSection.Title;
             exportedContent += Environment.NewLine;
             exportedContent += GetChildrenContent(subSection);
+            exportedContent += _tags.ClosingSubSection();
 
             subSection.ExportedContent = exportedContent;
         }
@@ -66,13 +68,6 @@ namespace FinsitHomeAssigment.Core.Exporter
         public void Export(BoldText boldText)
         {
             boldText.ExportedContent = $"{_tags.OpeningBoldText()}{boldText.Content}{_tags.ClosingBoldText()}";
-        }
-
-        private static string BuildTitle(string title, string closingTag)
-        {
-            return title.Contains(Environment.NewLine)
-                ? title.Replace(Environment.NewLine, $"{closingTag}{Environment.NewLine}")
-                : $"{title}{closingTag}";
         }
     }
 }

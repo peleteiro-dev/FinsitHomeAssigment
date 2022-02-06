@@ -1,11 +1,10 @@
-﻿using System;
-using FinsitHomeAssigment.Core.Exporter;
+﻿using FinsitHomeAssigment.Core.Exporter;
 using FinsitHomeAssigment.Core.Model;
 using Xunit;
 
 namespace FinsitHomeAssigment.Core.UnitTests.Exporter
 {
-    public class MediawikiExporterTests
+    public class HtmlExporterTests
     {
         private const string SectionTitle = "section title";
         private const string NestedSectionTitle = "nested section title";
@@ -25,13 +24,13 @@ namespace FinsitHomeAssigment.Core.UnitTests.Exporter
         private void Setup()
         {
             _document = new Document();
-            _documentExporter = new MediawikiExporter();
-            _tags =_documentExporter.GetTags();
+            _documentExporter = new HtmlExporter();
+            _tags = _documentExporter.GetTags();
             _expectedExportedContent = string.Empty;
         }
 
         [Fact]
-        public void MediawikiExporter_ShouldExportAnEmptyDocument()
+        public void HtmlExporter_ShouldExportAnEmptyDocument()
         {
             Setup();
             _expectedExportedContent = $"{_tags.OpeningDocument()}{_tags.ClosingDocument()}";
@@ -42,14 +41,13 @@ namespace FinsitHomeAssigment.Core.UnitTests.Exporter
         }
 
         [Fact]
-        public void MediawikiExporter_ShouldExportADocument_WithAnEmptySection()
+        public void HtmlExporter_ShouldExportADocument_WithAnEmptySection()
         {
             Setup();
             _document.AddDocumentElement(_section);
             _expectedExportedContent =
                 $"{_tags.OpeningDocument()}" +
                 $"{_tags.OpeningSection()}{SectionTitle}{_tags.ClosingSection()}" +
-                $"{Environment.NewLine}" +
                 $"{_tags.ClosingDocument()}";
 
             _document.Accept(_documentExporter);
@@ -58,17 +56,16 @@ namespace FinsitHomeAssigment.Core.UnitTests.Exporter
         }
 
         [Fact]
-        public void MediawikiExporter_ShouldExportADocument_WithANestedEmptySection()
+        public void HtmlExporter_ShouldExportADocument_WithANestedEmptySection()
         {
             Setup();
             _section.AddDocumentElement(_subSection);
             _document.AddDocumentElement(_section);
             _expectedExportedContent =
                 $"{_tags.OpeningDocument()}" +
-                $"{_tags.OpeningSection()}{SectionTitle}{_tags.ClosingSection()}" +
-                $"{Environment.NewLine}" +
+                $"{_tags.OpeningSection()}{SectionTitle}" +
                 $"{_tags.OpeningSubSection()}{NestedSectionTitle}{_tags.ClosingSubSection()}" +
-                $"{Environment.NewLine}" +
+                $"{_tags.ClosingSection()}" +
                 $"{_tags.ClosingDocument()}";
 
             _document.Accept(_documentExporter);
@@ -77,14 +74,13 @@ namespace FinsitHomeAssigment.Core.UnitTests.Exporter
         }
 
         [Fact]
-        public void MediawikiExporter_ShouldExportADocument_WithAnEmptyParagraph()
+        public void HtmlExporter_ShouldExportADocument_WithAnEmptyParagraph()
         {
             Setup();
             _document.AddDocumentElement(_paragraph);
             _expectedExportedContent =
                 $"{_tags.OpeningDocument()}" +
                 $"{_tags.OpeningParagraph()}{_tags.ClosingParagraph()}" +
-                $"{Environment.NewLine}" +
                 $"{_tags.ClosingDocument()}";
 
             _document.Accept(_documentExporter);
@@ -93,7 +89,7 @@ namespace FinsitHomeAssigment.Core.UnitTests.Exporter
         }
 
         [Fact]
-        public void MediawikiExporter_ShouldExportADocument_WithAText()
+        public void HtmlExporter_ShouldExportADocument_WithAText()
         {
             Setup();
             _document.AddDocumentElement(_text);
@@ -108,7 +104,7 @@ namespace FinsitHomeAssigment.Core.UnitTests.Exporter
         }
 
         [Fact]
-        public void MediawikiExporter_ShouldExportADocument_WithABoldText()
+        public void HtmlExporter_ShouldExportADocument_WithABoldText()
         {
             Setup();
             _document.AddDocumentElement(_boldText);
@@ -123,7 +119,7 @@ namespace FinsitHomeAssigment.Core.UnitTests.Exporter
         }
 
         [Fact]
-        public void MediawikiExporter_ShouldExportADocument_WithSectionParagraphTextAndBoldText()
+        public void HtmlExporter_ShouldExportADocument_WithSectionParagraphTextAndBoldText()
         {
             Setup();
             _paragraph.AddDocumentElement(_text);
@@ -132,13 +128,12 @@ namespace FinsitHomeAssigment.Core.UnitTests.Exporter
             _document.AddDocumentElement(_section);
             _expectedExportedContent =
                 $"{_tags.OpeningDocument()}" +
-                $"{_tags.OpeningSection()}{SectionTitle}{_tags.ClosingSection()}" +
-                $"{Environment.NewLine}" +
+                $"{_tags.OpeningSection()}{SectionTitle}" +
                 $"{_tags.OpeningParagraph()}" +
                 $"{_tags.OpeningText()}{TestingText}{_tags.ClosingText()}" +
                 $"{_tags.OpeningBoldText()}{TestingBoldText}{_tags.ClosingBoldText()}" +
                 $"{_tags.ClosingParagraph()}" +
-                $"{Environment.NewLine}" +
+                $"{_tags.ClosingSection()}" +
                 $"{_tags.ClosingDocument()}";
 
             _document.Accept(_documentExporter);

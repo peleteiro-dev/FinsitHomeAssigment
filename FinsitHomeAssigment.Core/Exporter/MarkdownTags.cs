@@ -9,15 +9,12 @@ namespace FinsitHomeAssigment.Core.Exporter
 
         public string OpeningSection() => "# ";
         public string ClosingSection() => string.Empty;
-        public string SectionSeparator() => Environment.NewLine;
 
         public string OpeningSubSection() => "## ";
         public string ClosingSubSection() => string.Empty;
-        public string SubSectionSeparator() => Environment.NewLine;
 
         public string OpeningParagraph() => string.Empty;
         public string ClosingParagraph() => string.Empty;
-        public string ParagraphSeparator() => Environment.NewLine;
 
         public string OpeningText() => string.Empty;
         public string ClosingText() => string.Empty;

@@ -30,13 +30,13 @@ namespace FinsitHomeAssigment
 
             var document = parser.Parse(newlines);
 
-            var exporter = new DocumentExporter(new HtmlTags());
-            document.Accept(exporter);
+            var markdownExporter = new MarkdownExporter();
+            document.Accept(markdownExporter);
             var exported = document.ExportedContent;
             Console.WriteLine(exported);
 
-            var documentExporter = new DocumentExporter(new MarkdownTags());
-            document.Accept(documentExporter);
+            var htmlExporter = new HtmlExporter();
+            document.Accept(htmlExporter);
             exported = document.ExportedContent;
             Console.WriteLine(exported);
 

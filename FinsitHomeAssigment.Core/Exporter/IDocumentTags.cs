@@ -7,15 +7,12 @@
 
         string OpeningSection();
         string ClosingSection();
-        string SectionSeparator();
 
         string OpeningSubSection();
         string ClosingSubSection();
-        string SubSectionSeparator();
 
         string OpeningParagraph();
         string ClosingParagraph();
-        string ParagraphSeparator();
 
         string OpeningText();
         string ClosingText();

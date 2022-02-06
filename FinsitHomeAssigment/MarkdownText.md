@@ -21,9 +21,9 @@ Some conclusion to Section 2.
 
 ## Section 3.1
 
-An introduction to Section 3.
+An introduction to Section 3.1
 
-Some conclusion to Section 3.
+Some conclusion to Section 3.1
 
 ## Section 3.2
 # Section 4

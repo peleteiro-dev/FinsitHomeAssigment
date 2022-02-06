@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using FinsitHomeAssigment.Core.Model;
+﻿using FinsitHomeAssigment.Core.Model;
 using FinsitHomeAssigment.Core.Parser;
 using FinsitHomeAssigment.Core.Util;
+using System.Collections.Generic;
 using Xunit;
 
 namespace FinsitHomeAssigment.Core.UnitTests.Parser
@@ -35,7 +35,7 @@ namespace FinsitHomeAssigment.Core.UnitTests.Parser
 
             _expectedOutput = new Document();
             _section1 = new Section("Section 1");
-            _subSection1 = new SubSection("Section 1.1");
+            _subSection1 = new SubSection("Subsection 1.1");
             _nestedSubsection = new SubSection("Nested Subsection 1.1.1");
             _section2 = new Section("Section 2");
 
@@ -134,8 +134,6 @@ namespace FinsitHomeAssigment.Core.UnitTests.Parser
             _section1.AddDocumentElement(_oneLineParagraph);
             _section1.AddDocumentElement(_subSection1);
             _subSection1.AddDocumentElement(_subSectionParagraph);
-            _subSection1.AddDocumentElement(_nestedSubsection);
-            _nestedSubsection.AddDocumentElement(_nestedSubSectionParagraph);
             _expectedOutput.AddDocumentElement(_section2);
             _section2.AddDocumentElement(_section2Paragraph1);
             var equal = _expectedOutput.Equals(parsedText);

@@ -1,19 +1,16 @@
-﻿using System;
+﻿using FinsitHomeAssigment.Core.Builder;
+using FinsitHomeAssigment.Core.Factory;
 using FinsitHomeAssigment.Core.Model;
 using System.Collections.Generic;
-using FinsitHomeAssigment.Core.Builder;
-using FinsitHomeAssigment.Core.Factory;
 
 namespace FinsitHomeAssigment.Core.Parser
 {
     public class MarkdownParser : AbstractParser
     {
-        private readonly TextLineParser _textLineParser;
+        private readonly TextLineParser _textLineParser = new TextLineParser();
 
-        public MarkdownParser(TextLineParser textLineParser)
+        public MarkdownParser()
         {
-            _textLineParser = textLineParser ?? throw new ArgumentNullException(nameof(textLineParser));
-
             AddFactory(new SectionFactory());
             AddFactory(new SubSectionFactory());
             AddFactory(new ParagraphFactory());

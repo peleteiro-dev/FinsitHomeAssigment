@@ -1,53 +1,69 @@
-﻿using FinsitHomeAssigment.Core.Exporter;
-using FinsitHomeAssigment.Core.Factory;
-using FinsitHomeAssigment.Core.Parser;
+﻿using FinsitHomeAssigment.Core;
+using FinsitHomeAssigment.Core.Util;
 using System;
-using System.IO;
-using System.Linq;
 
 namespace FinsitHomeAssigment
 {
-    class Program
+    public class Program
     {
+        private static readonly MarkdownConverter MarkdownConverter = new MarkdownConverter();
+        private static readonly string NewLine = $"{Environment.NewLine}{Environment.NewLine}";
+
         static void Main(string[] args)
         {
             Console.WriteLine("Starting program...\n");
 
-            var lineParser = new TextLineParser();
-            lineParser.AddFactory(new BoldTextFactory());
-            lineParser.AddFactory(new TextFactory());
+            var directory = FileUtils.GetAssemblyDir();
+            var path = FileUtils.JoinPaths(directory, "MarkdownText.md");
+            PrintFromFile(path);
 
-            var parser = new MarkdownParser(lineParser);
-            parser.AddFactory(new SectionFactory());
-            parser.AddFactory(new SubSectionFactory());
-            parser.AddFactory(new ParagraphFactory());
+            Console.WriteLine($"{NewLine}Press any key to continue...");
+            Console.ReadKey();
+            Console.Clear();
 
-            var path = @"C:\Users\Martin\source\repos\FinsitHomeAssigment\FinsitHomeAssigment.Core\Parser\MarkdownText.txt";
-            var lines = File.ReadAllLines(path).ToList();
-            var newlines = lines
-                .Select(line => string.IsNullOrEmpty(line) ? line : line + Environment.NewLine)
-                .ToList();
-
-            var document = parser.Parse(newlines);
-
-            var markdownExporter = new MarkdownExporter();
-            document.Accept(markdownExporter);
-            var exported = document.ExportedContent;
-            Console.WriteLine(exported);
-
-            var htmlExporter = new HtmlExporter();
-            document.Accept(htmlExporter);
-            exported = document.ExportedContent;
-            Console.WriteLine(exported);
-
-            var mediawikiExporter = new MediawikiExporter();
-            document.Accept(mediawikiExporter);
-            exported = document.ExportedContent;
-            Console.WriteLine(exported);
+            var text = FileUtils.ReadFileAsString(path);
+            PrintFromString(text);
 
             Console.WriteLine("\nFinishing program. Press enter to quit...");
 
             Console.ReadLine();
+        }
+
+        private static void PrintFromString(string text)
+        {
+            var mediawikiText = MarkdownConverter.FromStringToMediawiki(text);
+            ConsoleWriteColoredLine($"From string to Mediawiki{NewLine}");
+            Console.WriteLine(mediawikiText);
+
+            var markdownText = MarkdownConverter.FromStringToMarkdown(text);
+            ConsoleWriteColoredLine($"From string to Markdown{NewLine}");
+            Console.WriteLine(markdownText);
+
+            var htmlText = MarkdownConverter.FromStringToHtml(text);
+            ConsoleWriteColoredLine($"From string to Html{NewLine}");
+            Console.WriteLine(htmlText);
+        }
+
+        private static void PrintFromFile(string path)
+        {
+            var mediawiki = MarkdownConverter.FromFileToMediawiki(path);
+            ConsoleWriteColoredLine($"From file to Mediawiki{NewLine}");
+            Console.WriteLine(mediawiki);
+
+            var markdown = MarkdownConverter.FromFileToMarkdown(path);
+            ConsoleWriteColoredLine($"From file to Markdown{NewLine}");
+            Console.WriteLine(markdown);
+
+            var html = MarkdownConverter.FromFileToHtml(path);
+            ConsoleWriteColoredLine($"From file to Html{NewLine}");
+            Console.WriteLine(html);
+        }
+
+        private static void ConsoleWriteColoredLine(string line, ConsoleColor color = ConsoleColor.Green)
+        {
+            Console.ForegroundColor = color;
+            Console.WriteLine(line);
+            Console.ResetColor();
         }
     }
 }

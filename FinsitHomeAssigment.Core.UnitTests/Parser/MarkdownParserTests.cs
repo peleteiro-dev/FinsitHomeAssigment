@@ -29,10 +29,9 @@ namespace FinsitHomeAssigment.Core.UnitTests.Parser
         {
             var dir = FileUtils.GetAssemblyDir();
             var filePath = FileUtils.JoinPaths(dir, @$"\Files\{testCaseFile}");
-            _textToParse = FileUtils.ReadFile(filePath);
+            _textToParse = FileUtils.ReadFileAsLines(filePath);
 
-            var textLineParser = new TextLineParser();
-            _markdownParser = new MarkdownParser(textLineParser);
+            _markdownParser = new MarkdownParser();
 
             _expectedOutput = new Document();
             _section1 = new Section("Section 1");

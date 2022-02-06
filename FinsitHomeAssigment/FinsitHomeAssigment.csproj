@@ -9,4 +9,13 @@
     <ProjectReference Include="..\FinsitHomeAssigment.Core\FinsitHomeAssigment.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="EmptyMarkdownText.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="MarkdownText.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

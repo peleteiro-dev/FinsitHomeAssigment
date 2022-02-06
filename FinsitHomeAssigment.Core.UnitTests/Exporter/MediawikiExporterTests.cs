@@ -24,13 +24,13 @@ namespace FinsitHomeAssigment.Core.UnitTests.Exporter
         private void Setup()
         {
             _document = new Document();
-            _tags = new MediawikiTags();
             _documentExporter = new MediawikiExporter();
+            _tags =_documentExporter.GetTags();
             _expectedExportedContent = string.Empty;
         }
 
         [Fact]
-        public void HtmlExporter_ShouldExportAnEmptyDocument()
+        public void MediawikiExporter_ShouldExportAnEmptyDocument()
         {
             Setup();
             _expectedExportedContent = $"{_tags.OpeningDocument()}{_tags.ClosingDocument()}";
@@ -41,7 +41,7 @@ namespace FinsitHomeAssigment.Core.UnitTests.Exporter
         }
 
         [Fact]
-        public void HtmlExporter_ShouldExportADocument_WithAnEmptySection()
+        public void MediawikiExporter_ShouldExportADocument_WithAnEmptySection()
         {
             Setup();
             _document.AddDocumentElement(_section);
@@ -57,7 +57,7 @@ namespace FinsitHomeAssigment.Core.UnitTests.Exporter
         }
 
         [Fact]
-        public void HtmlExporter_ShouldExportADocument_WithANestedEmptySection()
+        public void MediawikiExporter_ShouldExportADocument_WithANestedEmptySection()
         {
             Setup();
             _section.AddDocumentElement(_subSection);
@@ -76,7 +76,7 @@ namespace FinsitHomeAssigment.Core.UnitTests.Exporter
         }
 
         [Fact]
-        public void HtmlExporter_ShouldExportADocument_WithAnEmptyParagraph()
+        public void MediawikiExporter_ShouldExportADocument_WithAnEmptyParagraph()
         {
             Setup();
             _document.AddDocumentElement(_paragraph);
@@ -92,7 +92,7 @@ namespace FinsitHomeAssigment.Core.UnitTests.Exporter
         }
 
         [Fact]
-        public void HtmlExporter_ShouldExportADocument_WithAText()
+        public void MediawikiExporter_ShouldExportADocument_WithAText()
         {
             Setup();
             _document.AddDocumentElement(_text);
@@ -107,7 +107,7 @@ namespace FinsitHomeAssigment.Core.UnitTests.Exporter
         }
 
         [Fact]
-        public void HtmlExporter_ShouldExportADocument_WithABoldText()
+        public void MediawikiExporter_ShouldExportADocument_WithABoldText()
         {
             Setup();
             _document.AddDocumentElement(_boldText);
@@ -122,7 +122,7 @@ namespace FinsitHomeAssigment.Core.UnitTests.Exporter
         }
 
         [Fact]
-        public void HtmlExporter_ShouldExportADocument_WithSectionParagraphTextAndBoldText()
+        public void MediawikiExporter_ShouldExportADocument_WithSectionParagraphTextAndBoldText()
         {
             Setup();
             _paragraph.AddDocumentElement(_text);

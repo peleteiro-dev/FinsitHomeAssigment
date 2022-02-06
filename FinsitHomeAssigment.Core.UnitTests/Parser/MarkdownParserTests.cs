@@ -43,36 +43,36 @@ namespace FinsitHomeAssigment.Core.UnitTests.Parser
             _paragraph1 = new Paragraph();
             _paragraph1.AddDocumentElement(new Text("Some "));
             _paragraph1.AddDocumentElement(new BoldText("(bold) introduction"));
-            _paragraph1.AddDocumentElement(new Text(" to Section 1.\n"));
+            _paragraph1.AddDocumentElement(new Text(" to Section 1."));
 
             _paragraph2 = new Paragraph();
-            _paragraph2.AddDocumentElement(new Text("A text describing Section 1.1\n"));
+            _paragraph2.AddDocumentElement(new Text("A text describing Section 1.1"));
 
             _paragraph3 = new Paragraph();
-            _paragraph3.AddDocumentElement(new Text("Some conclusion to Section 1.\n"));
+            _paragraph3.AddDocumentElement(new Text("Some conclusion to Section 1."));
 
             _subSectionParagraph = new Paragraph();
-            _subSectionParagraph.AddDocumentElement(new Text("An introduction to Subsection 1.1.\n"));
+            _subSectionParagraph.AddDocumentElement(new Text("An introduction to Subsection 1.1."));
 
             _nestedSubSectionParagraph = new Paragraph();
-            _nestedSubSectionParagraph.AddDocumentElement(new Text("An introduction to Nested Subsection 1.1.1.\n"));
+            _nestedSubSectionParagraph.AddDocumentElement(new Text("An introduction to Nested Subsection 1.1.1."));
 
             _section2Paragraph1 = new Paragraph();
-            _section2Paragraph1.AddDocumentElement(new Text("An introduction to Section 2.\n"));
+            _section2Paragraph1.AddDocumentElement(new Text("An introduction to Section 2."));
 
             _section2Paragraph2 = new Paragraph();
-            _section2Paragraph2.AddDocumentElement(new Text("Some conclusion to Section 2.\n"));
+            _section2Paragraph2.AddDocumentElement(new Text("Some conclusion to Section 2."));
 
             _oneLineParagraph = new Paragraph();
-            _oneLineParagraph.AddDocumentElement(new Text("An introduction to Section 1.\n"));
+            _oneLineParagraph.AddDocumentElement(new Text("An introduction to Section 1."));
 
             _multiLineParagraph = new Paragraph();
             _multiLineParagraph.AddDocumentElement(new Text("Some text "));
             _multiLineParagraph.AddDocumentElement(new BoldText("introduction"));
             _multiLineParagraph.AddDocumentElement(new Text(" to "));
-            _multiLineParagraph.AddDocumentElement(new BoldText("this paragraph.\n"));
-            _multiLineParagraph.AddDocumentElement(new Text("A second line in the same paragraph.\n"));
-            _multiLineParagraph.AddDocumentElement(new BoldText("And a third bold line.\n"));
+            _multiLineParagraph.AddDocumentElement(new BoldText("this paragraph."));
+            _multiLineParagraph.AddDocumentElement(new Text("A second line in the same paragraph."));
+            _multiLineParagraph.AddDocumentElement(new BoldText("And a third bold line."));
         }
 
         [Fact]

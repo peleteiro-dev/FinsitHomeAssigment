@@ -1,8 +1,9 @@
-﻿using FinsitHomeAssigment.Core.Parser;
+﻿using FinsitHomeAssigment.Core.Exporter;
+using FinsitHomeAssigment.Core.Factory;
+using FinsitHomeAssigment.Core.Parser;
 using System;
 using System.IO;
 using System.Linq;
-using FinsitHomeAssigment.Core.Factory;
 
 namespace FinsitHomeAssigment
 {
@@ -23,7 +24,21 @@ namespace FinsitHomeAssigment
 
             var path = @"C:\Users\Martin\source\repos\FinsitHomeAssigment\FinsitHomeAssigment.Core\Parser\MarkdownText.txt";
             var lines = File.ReadAllLines(path).ToList();
-            var document = parser.Parse(lines);
+            var newlines = lines
+                .Select(line => string.IsNullOrEmpty(line) ? line : line + Environment.NewLine)
+                .ToList();
+
+            var document = parser.Parse(newlines);
+
+            var exporter = new DocumentExporter(new HtmlTags());
+            document.Accept(exporter);
+            var exported = document.ExportedContent;
+            Console.WriteLine(exported);
+
+            var documentExporter = new DocumentExporter(new MarkdownTags());
+            document.Accept(documentExporter);
+            exported = document.ExportedContent;
+            Console.WriteLine(exported);
 
             Console.WriteLine("\nFinishing program. Press enter to quit...");
 

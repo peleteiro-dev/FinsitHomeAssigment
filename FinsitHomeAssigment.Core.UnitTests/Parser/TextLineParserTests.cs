@@ -1,6 +1,5 @@
 ﻿using FinsitHomeAssigment.Core.Model;
 using FinsitHomeAssigment.Core.Parser;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
@@ -17,7 +16,7 @@ namespace FinsitHomeAssigment.Core.UnitTests.Parser
             {
                 new Text("Some "), 
                 new BoldText("introduction"), 
-                new Text(" to Section 1.\n")
+                new Text(" to Section 1.")
             };
 
             var parser = new TextLineParser();
@@ -34,7 +33,7 @@ namespace FinsitHomeAssigment.Core.UnitTests.Parser
             const string textLine = "**Some introduction to Section 1.**";
             var expectedOutput = new List<DocumentElement>
             {
-                new BoldText("Some introduction to Section 1.\n")
+                new BoldText("Some introduction to Section 1.")
             };
 
             var parser = new TextLineParser();
@@ -51,7 +50,7 @@ namespace FinsitHomeAssigment.Core.UnitTests.Parser
             const string textLine = "Some introduction to Section 1.";
             var expectedOutput = new List<DocumentElement>
             {
-                new Text("Some introduction to Section 1.\n")
+                new Text("Some introduction to Section 1.")
             };
 
             var parser = new TextLineParser();
@@ -68,7 +67,7 @@ namespace FinsitHomeAssigment.Core.UnitTests.Parser
             const string textLine = "Some ++introduction++ to Section 1.";
             var expectedOutput = new List<DocumentElement>
             {
-                new Text("Some ++introduction++ to Section 1.\n")
+                new Text("Some ++introduction++ to Section 1.")
             };
 
             var parser = new TextLineParser();

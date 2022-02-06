@@ -13,8 +13,7 @@ namespace FinsitHomeAssigment.Core.Extension
 
             var splits = SplitLine(line, delimiters);
             textItems = ConvertSplitsToList(splits, delimiters);
-            AddNewLineToLastItem(textItems);
-            
+
             return textItems;
         }
 
@@ -53,15 +52,6 @@ namespace FinsitHomeAssigment.Core.Extension
             }
 
             return textItems;
-        }
-
-        private static void AddNewLineToLastItem(IList<string> list)
-        {
-            const string newLine = "\n";
-            var lastItem = list.Last();
-            if (lastItem.Contains(newLine)) return;
-
-            list[list.Count - 1] = lastItem + newLine;
         }
     }
 }

@@ -12,7 +12,7 @@ namespace FinsitHomeAssigment.Core.UnitTests.Extension
         {
             const string lineToSplit = "Some **(bold) introduction** to Section 1.";
             var delimiters = new List<string> { "**" };
-            var expectedOutput = new List<string> { "Some ", "**(bold) introduction", " to Section 1.\n" };
+            var expectedOutput = new List<string> { "Some ", "**(bold) introduction", " to Section 1." };
 
             var splitLine = lineToSplit.ToListOfTextItems(delimiters);
 
@@ -25,7 +25,7 @@ namespace FinsitHomeAssigment.Core.UnitTests.Extension
         {
             const string lineToSplit = "Some **(bold) introduction** **to** Section 1.";
             var delimiters = new List<string> { "**" };
-            var expectedOutput = new List<string> { "Some ", "**(bold) introduction", " ", "**to", " Section 1.\n" };
+            var expectedOutput = new List<string> { "Some ", "**(bold) introduction", " ", "**to", " Section 1." };
 
             var splitLine = lineToSplit.ToListOfTextItems(delimiters);
 
@@ -38,7 +38,7 @@ namespace FinsitHomeAssigment.Core.UnitTests.Extension
         {
             const string lineToSplit = "**Some** introduction to Section 1.";
             var delimiters = new List<string> { "**" };
-            var expectedOutput = new List<string> { "**Some", " introduction to Section 1.\n" };
+            var expectedOutput = new List<string> { "**Some", " introduction to Section 1." };
 
             var splitLine = lineToSplit.ToListOfTextItems(delimiters);
 
@@ -51,7 +51,7 @@ namespace FinsitHomeAssigment.Core.UnitTests.Extension
         {
             const string lineToSplit = "Some introduction to **Section 1.**";
             var delimiters = new List<string> { "**" };
-            var expectedOutput = new List<string> { "Some introduction to ", "**Section 1.\n" };
+            var expectedOutput = new List<string> { "Some introduction to ", "**Section 1." };
 
             var splitLine = lineToSplit.ToListOfTextItems(delimiters);
 
@@ -64,7 +64,7 @@ namespace FinsitHomeAssigment.Core.UnitTests.Extension
         {
             const string lineToSplit = "**Some** introduction to **Section 1.**";
             var delimiters = new List<string> { "**" };
-            var expectedOutput = new List<string> { "**Some", " introduction to ", "**Section 1.\n" };
+            var expectedOutput = new List<string> { "**Some", " introduction to ", "**Section 1." };
 
             var splitLine = lineToSplit.ToListOfTextItems(delimiters);
 
@@ -77,7 +77,7 @@ namespace FinsitHomeAssigment.Core.UnitTests.Extension
         {
             const string lineToSplit = "Some **(bold) introduction** to Section 1.";
             var delimiters = new List<string> { "**" };
-            var expectedOutput = new List<string> { "Some ", "**(bold) introduction", " to Section 1.\n" };
+            var expectedOutput = new List<string> { "Some ", "**(bold) introduction", " to Section 1." };
 
             var splitLine = lineToSplit.ToListOfTextItems(delimiters);
 
@@ -90,7 +90,7 @@ namespace FinsitHomeAssigment.Core.UnitTests.Extension
         {
             const string lineToSplit = "Some ++(bold) introduction++ to Section 1.";
             var delimiters = new List<string> { "**" };
-            var expectedOutput = new List<string> { $"{lineToSplit}\n" };
+            var expectedOutput = new List<string> { $"{lineToSplit}" };
 
             var splitLine = lineToSplit.ToListOfTextItems(delimiters);
 
@@ -103,7 +103,7 @@ namespace FinsitHomeAssigment.Core.UnitTests.Extension
         {
             const string lineToSplit = "Some **(bold) introduction to Section 1.";
             var delimiters = new List<string> { "**" };
-            var expectedOutput = new List<string> { "Some ", "**(bold) introduction to Section 1.\n" };
+            var expectedOutput = new List<string> { "Some ", "**(bold) introduction to Section 1." };
 
             var splitLine = lineToSplit.ToListOfTextItems(delimiters);
 
@@ -114,9 +114,9 @@ namespace FinsitHomeAssigment.Core.UnitTests.Extension
         [Fact]
         public void WhenInputEndsWithNewLine_ToListOfTextItems_ShouldNotAddIt()
         {
-            const string lineToSplit = "Some **(bold) introduction** to Section 1.\n";
+            const string lineToSplit = "Some **(bold) introduction** to Section 1.";
             var delimiters = new List<string> { "**" };
-            var expectedOutput = new List<string> { "Some ", "**(bold) introduction", " to Section 1.\n" };
+            var expectedOutput = new List<string> { "Some ", "**(bold) introduction", " to Section 1." };
 
             var splitLine = lineToSplit.ToListOfTextItems(delimiters);
 
@@ -129,7 +129,7 @@ namespace FinsitHomeAssigment.Core.UnitTests.Extension
         {
             const string lineToSplit = "++Some++ **(bold) introduction** ##to## ++Section 1.++";
             var delimiters = new List<string> { "**", "++", "##" };
-            var expectedOutput = new List<string> { "++Some", " ", "**(bold) introduction", " ", "##to", " ", "++Section 1.\n" };
+            var expectedOutput = new List<string> { "++Some", " ", "**(bold) introduction", " ", "##to", " ", "++Section 1." };
 
             var splitLine = lineToSplit.ToListOfTextItems(delimiters);
 
@@ -142,7 +142,7 @@ namespace FinsitHomeAssigment.Core.UnitTests.Extension
         {
             const string lineToSplit = "++Some++ **(bold) introduction** ##to## ++Section 1.++";
             var delimiters = new List<string>();
-            var expectedOutput = new List<string> { $"{lineToSplit}\n" };
+            var expectedOutput = new List<string> { $"{lineToSplit}" };
 
             var splitLine = lineToSplit.ToListOfTextItems(delimiters);
 

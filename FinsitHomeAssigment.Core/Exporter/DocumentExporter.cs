@@ -3,49 +3,54 @@ using System.Linq;
 
 namespace FinsitHomeAssigment.Core.Exporter
 {
-    public class HtmlExporter : IDocumentExporter
+    public class DocumentExporter : IDocumentExporter
     {
-        private readonly HtmlConstants _constants;
+        private readonly IDocumentTags _tags;
 
-        public HtmlExporter(HtmlConstants constants)
+        public DocumentExporter(IDocumentTags tags)
         {
-            _constants = constants;
+            _tags = tags;
         }
+
+        public IDocumentTags GetTags() => _tags;
 
         public void Export(Document document)
         {
-            var exportedContent = _constants.OpeningDocument;
+            var exportedContent = _tags.OpeningDocument();
             exportedContent += GetChildrenContent(document);
-            exportedContent += _constants.ClosingDocument;
-
+            exportedContent += _tags.ClosingDocument();
+            
             document.ExportedContent = exportedContent;
         }
 
         public void Export(Section section)
         {
-            var exportedContent = _constants.OpeningSection;
+            var exportedContent = _tags.OpeningSection();
             exportedContent += section.Title;
-            exportedContent  += GetChildrenContent(section);
-            exportedContent += _constants.ClosingSection;
+            exportedContent += _tags.SectionSeparator();
+            exportedContent += GetChildrenContent(section);
+            exportedContent += _tags.ClosingSection();
 
             section.ExportedContent = exportedContent;
         }
 
         public void Export(SubSection subSection)
         {
-            var exportedContent = _constants.OpeningSection;
+            var exportedContent = _tags.OpeningSubSection();
             exportedContent += subSection.Title;
+            exportedContent += _tags.SubSectionSeparator();
             exportedContent += GetChildrenContent(subSection);
-            exportedContent += _constants.ClosingSection;
+            exportedContent += _tags.ClosingSubSection();
 
             subSection.ExportedContent = exportedContent;
         }
 
         public void Export(Paragraph paragraph)
         {
-            var exportedContent = _constants.OpeningParagraph;
+            var exportedContent = _tags.OpeningParagraph();
             exportedContent += GetChildrenContent(paragraph);
-            exportedContent += _constants.ClosingParagraph;
+            exportedContent += _tags.ClosingParagraph();
+            exportedContent += _tags.ParagraphSeparator();
 
             paragraph.ExportedContent = exportedContent;
         }
@@ -61,12 +66,12 @@ namespace FinsitHomeAssigment.Core.Exporter
 
         public void Export(Text text)
         {
-           text.ExportedContent = $"{_constants.OpeningText}{text.Content}{_constants.ClosingText}";
+            text.ExportedContent = $"{_tags.OpeningText()}{text.Content}{_tags.ClosingText()}";
         }
 
         public void Export(BoldText boldText)
         {
-            boldText.ExportedContent = $"{_constants.OpeningBoldText}{boldText.Content}{_constants.ClosingBoldText}";
+            boldText.ExportedContent = $"{_tags.OpeningBoldText()}{boldText.Content}{_tags.ClosingBoldText()}";
         }
     }
 }

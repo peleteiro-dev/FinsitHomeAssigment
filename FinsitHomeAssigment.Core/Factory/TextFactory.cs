@@ -20,7 +20,7 @@ namespace FinsitHomeAssigment.Core.Factory
         // Text factory can not intercept lines that should be processed by other factories
         private static bool StartsWithAnyDelimiter(string line)
         {
-            return Constant.Delimiters
+            return Separator.List
                 .Where(delimiter => delimiter != string.Empty)// exclude empty cos any non null string starts with empty
                 .Any(delimiter => line.StartsWith(delimiter));
         }

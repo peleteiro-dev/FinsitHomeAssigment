@@ -4,7 +4,7 @@ namespace FinsitHomeAssigment.Core.Factory
 {
     public class SubSectionFactory : IDocumentElementFactory
     {
-        public string Delimiter => Constant.SubSectionDelimiter;
+        public string Delimiter => Separator.SubSection;
 
         public DocumentElement Create(string line)
         {

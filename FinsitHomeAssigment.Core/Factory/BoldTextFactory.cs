@@ -4,7 +4,7 @@ namespace FinsitHomeAssigment.Core.Factory
 {
     public class BoldTextFactory : IDocumentElementFactory
     {
-        public string Delimiter => Constant.BoldTextDelimiter;
+        public string Delimiter => Separator.BoldText;
 
         public DocumentElement Create(string line)
         {

@@ -40,6 +40,11 @@ namespace FinsitHomeAssigment
             exported = document.ExportedContent;
             Console.WriteLine(exported);
 
+            var mediawikiExporter = new MediawikiExporter();
+            document.Accept(mediawikiExporter);
+            exported = document.ExportedContent;
+            Console.WriteLine(exported);
+
             Console.WriteLine("\nFinishing program. Press enter to quit...");
 
             Console.ReadLine();

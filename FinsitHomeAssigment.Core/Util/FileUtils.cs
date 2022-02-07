@@ -14,15 +14,17 @@ namespace FinsitHomeAssigment.Core.Util
         public static IEnumerable<string> ReadFileAsLines(string filePath) => File.ReadAllLines(filePath).ToList();
         public static string ReadFileAsString(string filePath) => File.ReadAllText(filePath);
 
-        public static void ValidateFile(string filePath, IEnumerable<string> validExtensions)
+        public static string ValidateFile(string filePath, IEnumerable<string> validExtensions)
         {
             if (!Exists(filePath))
-                throw new FileNotFoundException($"File { filePath } not found.");
+                return ($"File { filePath } not found.");
 
             var extension = GetFileExtension(filePath);
             var extensions = validExtensions.ToList();
             if (!extensions.Contains(extension))
-                throw new ArgumentOutOfRangeException($"Invalid file type ({extension}), only accepted {string.Join(", ", extensions)}.");
+                return ($"Invalid file type ({extension}), only accepted {string.Join(", ", extensions)}.");
+
+            return null;
         }
 
         public static bool Exists(string filePath)

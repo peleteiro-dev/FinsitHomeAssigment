@@ -19,6 +19,8 @@ namespace FinsitHomeAssigment.Core.Parser
         public Document Parse(IEnumerable<string> lines)
         {
             var document = new DocumentBuilder();
+            if (lines == null) return document.GetDocument();
+
             foreach (var line in lines)
             {
                 var documentElement = CreateDocumentElement(line);

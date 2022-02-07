@@ -13,6 +13,8 @@ namespace FinsitHomeAssigment.Core
         private static readonly HtmlExporter HtmlExporter = new HtmlExporter();
         private static readonly MediawikiExporter MediawikiExporter = new MediawikiExporter();
         private static readonly MarkdownExporter MarkdownExporter = new MarkdownExporter();
+        private const bool AddNewLine = true;
+        private const bool DoNotAddNewLine = false;
 
         private static readonly IEnumerable<string> ValidExtensions = new List<string>
         {
@@ -26,64 +28,67 @@ namespace FinsitHomeAssigment.Core
 
         public string FromFileToHtml(string filePath)
         {
-            const bool addNewLine = false;
-            
-            return ExportFromFile(filePath, HtmlExporter, addNewLine);
+            return ExportFromFile(filePath, HtmlExporter, DoNotAddNewLine);
         }
 
         public string FromFileToMediawiki(string filePath)
         {
-            const bool addNewLine = true;
-
-            return ExportFromFile(filePath, MediawikiExporter, addNewLine);
+            return ExportFromFile(filePath, MediawikiExporter, AddNewLine);
         }
 
         public string FromFileToMarkdown(string filePath)
         {
-            const bool addNewLine = true;
-         
-            return ExportFromFile(filePath, MarkdownExporter, addNewLine);
+            return ExportFromFile(filePath, MarkdownExporter, AddNewLine);
         }
 
         public string FromStringToHtml(string markdownText)
         {
-            const bool addNewLine = false;
-
-            return ExportFromString(markdownText, HtmlExporter, addNewLine);
+            return ExportFromString(markdownText, HtmlExporter, DoNotAddNewLine);
         }
 
         public string FromStringToMediawiki(string markdownText)
         {
-            const bool addNewLine = true;
-
-            return ExportFromString(markdownText, MediawikiExporter, addNewLine);
+            return ExportFromString(markdownText, MediawikiExporter, AddNewLine);
         }
 
         public string FromStringToMarkdown(string markdownText)
         {
-            const bool addNewLine = true;
-
-            return ExportFromString(markdownText, MarkdownExporter, addNewLine);
+            return ExportFromString(markdownText, MarkdownExporter, AddNewLine);
         }
 
         private static string ExportFromFile(string filePath, IDocumentExporter exporter, bool addNewLine)
         {
-            FileUtils.ValidateFile(filePath, ValidExtensions);
+            try
+            {
+                var validationResult = FileUtils.ValidateFile(filePath, ValidExtensions);
+                if (!string.IsNullOrEmpty(validationResult)) return validationResult;
 
-            var buffer = FileUtils.ReadFileAsLines(filePath);
-            if (addNewLine) buffer = buffer.AddNewLine();
+                var buffer = FileUtils.ReadFileAsLines(filePath);
+                if (addNewLine) buffer = buffer.AddNewLine();
 
-            return Export(buffer, exporter);
+                return Export(buffer, exporter);
+            }
+            catch (Exception e)
+            {
+                return $"Unexpected exception. Please contact with Martin and provide with this information. Message: {e.Message}.";
+            }
         }
 
         private static string ExportFromString(string content, IDocumentExporter exporter, bool addNewLine)
         {
-            IEnumerable<string> buffer = content?
-                .Split(Environment.NewLine);
+            try
+            {
+                IEnumerable<string> buffer = content?
+                    .Split(Environment.NewLine);
 
-            if (addNewLine) buffer = buffer.AddNewLine();
+                if (addNewLine) buffer = buffer.AddNewLine();
 
-            return Export(buffer, exporter);
+                return Export(buffer, exporter);
+            }
+            catch (Exception e)
+            {
+                return $"Unexpected exception. Please contact with Martin and provide with this information. Message: {e.Message}.";
+            }
         }
 
         private static string Export(IEnumerable<string> buffer, IDocumentExporter exporter)
@@ -91,7 +96,21 @@ namespace FinsitHomeAssigment.Core
             var document = MarkdownParser.Parse(buffer);
             document.Accept(exporter);
 
-            return document.ExportedContent;
+            return RemoveTrailingNewLines(document.ExportedContent);
+        }
+
+        private static string RemoveTrailingNewLines(string content)
+        {
+            var found = content.EndsWith(Environment.NewLine);
+            while (found)
+            {
+                var index = content.LastIndexOf(Environment.NewLine, StringComparison.Ordinal);
+                content = content.Substring(0, index);
+                
+                found = content.EndsWith(Environment.NewLine);
+            }
+
+            return content;
         }
     }
 }

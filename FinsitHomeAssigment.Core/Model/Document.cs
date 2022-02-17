@@ -3,7 +3,7 @@ using FinsitHomeAssigment.Core.Exporter;
 
 namespace FinsitHomeAssigment.Core.Model
 {
-    public partial class Document : DocumentElement
+    public class Document : DocumentElement
     {
         public override bool IsComposite()
         {
@@ -12,17 +12,12 @@ namespace FinsitHomeAssigment.Core.Model
 
         public override void Accept(IDocumentExporter documentExporter)
         {
-            foreach (var documentElement in DocumentElements)
-            {
-                documentElement.Accept(documentExporter);
-            }
-
             documentExporter.Export(this);
         }
 
         public override bool Equals(DocumentElement other)
         {
-            if (other == null || !(other is Document otherDocument)) return false;
+            if (!(other is Document otherDocument)) return false;
 
             return DocumentElements.SequenceEqual(otherDocument.DocumentElements) &&
                    IsComposite() == otherDocument.IsComposite();

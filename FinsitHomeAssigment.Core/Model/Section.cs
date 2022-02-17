@@ -19,17 +19,12 @@ namespace FinsitHomeAssigment.Core.Model
 
         public override void Accept(IDocumentExporter documentExporter)
         {
-            foreach (var documentElement in DocumentElements)
-            {
-                documentElement.Accept(documentExporter);
-            }
-
             documentExporter.Export(this);
         }
 
         public override bool Equals(DocumentElement other)
         {
-            if (other == null || !(other is Section otherSection)) return false;
+            if (!(other is Section otherSection)) return false;
 
             return DocumentElements.SequenceEqual(otherSection.DocumentElements) &&
                    Title == otherSection.Title &&

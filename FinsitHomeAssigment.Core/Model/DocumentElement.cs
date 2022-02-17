@@ -6,7 +6,6 @@ namespace FinsitHomeAssigment.Core.Model
 {
     public abstract class DocumentElement : IEquatable<DocumentElement>
     {
-        public string ExportedContent { get; set; }
         public IList<DocumentElement> DocumentElements { get; set; } = new List<DocumentElement>();
 
         public abstract bool IsComposite();

@@ -12,17 +12,12 @@ namespace FinsitHomeAssigment.Core.Model
 
         public override void Accept(IDocumentExporter documentExporter)
         {
-            foreach (var documentElement in DocumentElements)
-            {
-                documentElement.Accept(documentExporter);
-            }
-
             documentExporter.Export(this);
         }
 
         public override bool Equals(DocumentElement other)
         {
-            if (other == null || !(other is Paragraph otherParagraph)) return false;
+            if (!(other is Paragraph otherParagraph)) return false;
 
             return DocumentElements.SequenceEqual(otherParagraph.DocumentElements) &&
                    IsComposite() == otherParagraph.IsComposite();

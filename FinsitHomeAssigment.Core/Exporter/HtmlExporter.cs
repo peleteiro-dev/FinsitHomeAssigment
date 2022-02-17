@@ -1,69 +1,83 @@
 ﻿using FinsitHomeAssigment.Core.Model;
-using System.Linq;
 
 namespace FinsitHomeAssigment.Core.Exporter
 {
     public class HtmlExporter : IDocumentExporter
     {
         private readonly IDocumentTags _tags = new HtmlTags();
+        private string _exportedContent;
 
         public IDocumentTags GetTags() => _tags;
+        public string GetExportedContent() => _exportedContent;
 
         public void Export(Document document)
         {
-            var exportedContent = _tags.OpeningDocument();
-            exportedContent += GetChildrenContent(document);
-            exportedContent += _tags.ClosingDocument();
+            _exportedContent = _tags.OpeningDocument();
+            ExportChildrenContent(document);
+            _exportedContent += _tags.ClosingDocument();
+        }
 
-            document.ExportedContent = exportedContent;
+        private void ExportChildrenContent(DocumentElement parent)
+        {
+            foreach (var documentElement in parent.DocumentElements)
+            {
+                Export(documentElement);
+            }
+        }
+
+        private void Export(DocumentElement documentElement)
+        {
+            switch (documentElement)
+            {
+                case Section section:
+                    Export(section);
+                    break;
+                case SubSection subSection:
+                    Export(subSection);
+                    break;
+                case Paragraph paragraph:
+                    Export(paragraph);
+                    break;
+                case Text text:
+                    Export(text);
+                    break;
+                case BoldText boldText:
+                    Export(boldText);
+                    break;
+            }
         }
 
         public void Export(Section section)
         {
-            var exportedContent = _tags.OpeningSection();
-            exportedContent += section.Title;
-            exportedContent += GetChildrenContent(section);
-            exportedContent += _tags.ClosingSection();
-
-            section.ExportedContent = exportedContent;
+            _exportedContent += _tags.OpeningSection();
+            _exportedContent += section.Title;
+            ExportChildrenContent(section);
+            _exportedContent += _tags.ClosingSection();
         }
 
         public void Export(SubSection subSection)
         {
-            var exportedContent = _tags.OpeningSubSection();
-            exportedContent += subSection.Title;
-            exportedContent += GetChildrenContent(subSection);
-            exportedContent += _tags.ClosingSubSection();
-
-            subSection.ExportedContent = exportedContent;
+            _exportedContent += _tags.OpeningSubSection();
+            _exportedContent += subSection.Title;
+            ExportChildrenContent(subSection);
+            _exportedContent += _tags.ClosingSubSection();
         }
 
         public void Export(Paragraph paragraph)
         {
-            var exportedContent = _tags.OpeningParagraph();
-            exportedContent += GetChildrenContent(paragraph);
-            exportedContent += _tags.ClosingParagraph();
-
-            paragraph.ExportedContent = exportedContent;
-        }
-
-        private static string GetChildrenContent(DocumentElement parent)
-        {
-            var childrenContent = string.Empty;
-            childrenContent = parent.DocumentElements.Aggregate(childrenContent,
-                            (current, documentElement) => current + documentElement.ExportedContent);
-
-            return childrenContent;
+            _exportedContent += _tags.OpeningParagraph();
+            ExportChildrenContent(paragraph);
+            _exportedContent += _tags.ClosingParagraph();
         }
 
         public void Export(Text text)
         {
-            text.ExportedContent = $"{_tags.OpeningText()}{text.Content}{_tags.ClosingText()}";
+            _exportedContent += $"{_tags.OpeningText()}{text.Content}{_tags.ClosingText()}";
         }
 
         public void Export(BoldText boldText)
         {
-            boldText.ExportedContent = $"{_tags.OpeningBoldText()}{boldText.Content}{_tags.ClosingBoldText()}";
+            _exportedContent += $"{_tags.OpeningBoldText()}{boldText.Content}{_tags.ClosingBoldText()}";
         }
     }
 }

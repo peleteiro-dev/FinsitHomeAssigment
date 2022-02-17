@@ -38,7 +38,7 @@ namespace FinsitHomeAssigment.Core.UnitTests.Exporter
 
             _document.Accept(_documentExporter);
 
-            Assert.Equal(_expectedExportedContent, _document.ExportedContent);
+            Assert.Equal(_expectedExportedContent, _documentExporter.GetExportedContent());
         }
 
         [Fact]
@@ -54,7 +54,7 @@ namespace FinsitHomeAssigment.Core.UnitTests.Exporter
 
             _document.Accept(_documentExporter);
 
-            Assert.Equal(_expectedExportedContent, _document.ExportedContent);
+            Assert.Equal(_expectedExportedContent, _documentExporter.GetExportedContent());
         }
 
         [Fact]
@@ -73,7 +73,7 @@ namespace FinsitHomeAssigment.Core.UnitTests.Exporter
 
             _document.Accept(_documentExporter);
 
-            Assert.Equal(_expectedExportedContent, _document.ExportedContent);
+            Assert.Equal(_expectedExportedContent, _documentExporter.GetExportedContent());
         }
 
         [Fact]
@@ -89,7 +89,7 @@ namespace FinsitHomeAssigment.Core.UnitTests.Exporter
 
             _document.Accept(_documentExporter);
 
-            Assert.Equal(_expectedExportedContent, _document.ExportedContent);
+            Assert.Equal(_expectedExportedContent, _documentExporter.GetExportedContent());
         }
 
         [Fact]
@@ -104,7 +104,7 @@ namespace FinsitHomeAssigment.Core.UnitTests.Exporter
 
             _document.Accept(_documentExporter);
 
-            Assert.Equal(_expectedExportedContent, _document.ExportedContent);
+            Assert.Equal(_expectedExportedContent, _documentExporter.GetExportedContent());
         }
 
         [Fact]
@@ -119,7 +119,7 @@ namespace FinsitHomeAssigment.Core.UnitTests.Exporter
 
             _document.Accept(_documentExporter);
 
-            Assert.Equal(_expectedExportedContent, _document.ExportedContent);
+            Assert.Equal(_expectedExportedContent, _documentExporter.GetExportedContent());
         }
 
         [Fact]
@@ -143,7 +143,8 @@ namespace FinsitHomeAssigment.Core.UnitTests.Exporter
 
             _document.Accept(_documentExporter);
 
-            Assert.Equal(_expectedExportedContent, _document.ExportedContent);
+            var exported = _documentExporter.GetExportedContent();
+            Assert.Equal(_expectedExportedContent, _documentExporter.GetExportedContent());
         }
     }
 }

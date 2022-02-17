@@ -96,7 +96,7 @@ namespace FinsitHomeAssigment.Core
             var document = MarkdownParser.Parse(buffer);
             document.Accept(exporter);
 
-            return RemoveTrailingNewLines(document.ExportedContent);
+            return RemoveTrailingNewLines(exporter.GetExportedContent());
         }
 
         private static string RemoveTrailingNewLines(string content)

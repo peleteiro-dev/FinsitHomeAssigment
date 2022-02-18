@@ -1,15 +1,5 @@
-﻿# Section 1
+﻿# section
 
-An introduction to Section 1.
+## subsection
 
-## Subsection 1.1
-
-An introduction to Subsection 1.1.
-
-## Nested Subsection 1.1.1
-
-An introduction to Subsection 1.1.1
-
-# Section 2
-
-An introduction to Section 2.
+## nested subsection

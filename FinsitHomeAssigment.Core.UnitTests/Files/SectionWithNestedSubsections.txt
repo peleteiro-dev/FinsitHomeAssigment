@@ -1,5 +1,5 @@
-﻿# section
+﻿# Section
 
-## subsection
+## SubSection
 
-## nested subsection
+## NestedSubSection

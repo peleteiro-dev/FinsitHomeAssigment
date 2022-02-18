@@ -1,1 +1,1 @@
-﻿text**bold text**
+﻿Text**BoldText**

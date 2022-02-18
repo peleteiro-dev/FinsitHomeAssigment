@@ -11,15 +11,15 @@ namespace FinsitHomeAssigment.Core.UnitTests.Builder
         private Section _section;
         private SubSection _subSection;
         private Paragraph _paragraph;
-        private readonly Text _text = new Text("First line ");
-        private readonly BoldText _boldText = new BoldText("bold");
+        private readonly Text _text = new Text(Constant.Text);
+        private readonly BoldText _boldText = new BoldText(Constant.BoldText);
 
         private void Setup()
         {
             _documentBuilder = new DocumentBuilder();
             _expectedDocument = new Document();
-            _section = new Section("Section 1");
-            _subSection = new SubSection("Subsection 1");
+            _section = new Section(Constant.Section);
+            _subSection = new SubSection(Constant.SubSection);
             _paragraph = new Paragraph();
         }
 

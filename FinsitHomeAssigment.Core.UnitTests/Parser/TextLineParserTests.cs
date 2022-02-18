@@ -8,73 +8,58 @@ namespace FinsitHomeAssigment.Core.UnitTests.Parser
 {
     public class TextLineParserTests
     {
+        private readonly Text _text = new Text(Constant.Text);
+        private readonly BoldText _bold = new BoldText(Constant.BoldText);
+
         [Fact]
         public void WhenInputContainsValidDelimiters_Parse_ShouldReturnExpectedOutput()
         {
-            const string textLine = "Some **introduction** to Section 1.";
-            var expectedOutput = new List<DocumentElement>
-            {
-                new Text("Some "), 
-                new BoldText("introduction"), 
-                new Text(" to Section 1.")
-            };
+            var textLine = $"{Constant.Text}**{Constant.BoldText}**{Constant.Text}";
+            var expectedOutput = new List<DocumentElement> { _text, _bold, _text };
 
             var parser = new TextLineParser();
             var documentElements = parser.Parse(textLine);
 
             var equal = expectedOutput.SequenceEqual(documentElements);
-
             Assert.True(equal);
         }
 
         [Fact]
         public void WhenInputContainsOnlyBoldText_Parse_ShouldReturnExpectedOutput()
         {
-            const string textLine = "**Some introduction to Section 1.**";
-            var expectedOutput = new List<DocumentElement>
-            {
-                new BoldText("Some introduction to Section 1.")
-            };
+            var textLine = $"**{Constant.BoldText}**";
+            var expectedOutput = new List<DocumentElement> { _bold };
 
             var parser = new TextLineParser();
             var documentElements = parser.Parse(textLine);
 
             var equal = expectedOutput.SequenceEqual(documentElements);
-
             Assert.True(equal);
         }
 
         [Fact]
         public void WhenInputContainsOnlyText_Parse_ShouldReturnExpectedOutput()
         {
-            const string textLine = "Some introduction to Section 1.";
-            var expectedOutput = new List<DocumentElement>
-            {
-                new Text("Some introduction to Section 1.")
-            };
+            var textLine = Constant.Text;
+            var expectedOutput = new List<DocumentElement> { _text };
 
             var parser = new TextLineParser();
             var documentElements = parser.Parse(textLine);
 
             var equal = expectedOutput.SequenceEqual(documentElements);
-
             Assert.True(equal);
         }
 
         [Fact]
         public void WhenInputDoeNotContainsValidDelimiters_Parse_ShouldReturnExpectedOutput()
         {
-            const string textLine = "Some ++introduction++ to Section 1.";
-            var expectedOutput = new List<DocumentElement>
-            {
-                new Text("Some ++introduction++ to Section 1.")
-            };
+            var textLine = $"++{Constant.Text}++";
+            var expectedOutput = new List<DocumentElement> { new Text(textLine) };
 
             var parser = new TextLineParser();
             var documentElements = parser.Parse(textLine);
 
             var equal = expectedOutput.SequenceEqual(documentElements);
-
             Assert.True(equal);
         }
 
@@ -89,8 +74,7 @@ namespace FinsitHomeAssigment.Core.UnitTests.Parser
             var documentElements = parser.Parse(textLine);
 
             var equal = expectedOutput.SequenceEqual(documentElements);
-
             Assert.True(equal);
-         }
+        }
     }
 }

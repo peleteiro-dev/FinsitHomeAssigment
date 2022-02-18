@@ -1,149 +1,131 @@
-using System;
 using FinsitHomeAssigment.Core.Exporter;
-using FinsitHomeAssigment.Core.Model;
+using System;
 using Xunit;
 
 namespace FinsitHomeAssigment.Core.UnitTests.Exporter
 {
-    public class MarkdownExporterTests
+    public class MarkdownExporterTests : ExporterBaseTest
     {
-        private const string SectionTitle = "section title";
-        private const string NestedSectionTitle = "nested section title";
-        private const string TestingText = "testing text";
-        private const string TestingBoldText = "testing bold";
-
-        private Document _document;
-        private IDocumentTags _tags;
-        private IDocumentExporter _documentExporter;
-        private readonly Section _section = new Section(SectionTitle);
-        private readonly SubSection _subSection = new SubSection(NestedSectionTitle);
-        private readonly Paragraph _paragraph = new Paragraph();
-        private readonly Text _text = new Text(TestingText);
-        private readonly BoldText _boldText = new BoldText(TestingBoldText);
-        private string _expectedExportedContent;
-
         private void Setup()
         {
-            _document = new Document();
-            _documentExporter = new MarkdownExporter();
-            _tags = _documentExporter.GetTags();
-            _expectedExportedContent = string.Empty;
+            DocumentExporter = new MarkdownExporter();
+            Tags = DocumentExporter.GetTags();
         }
 
         [Fact]
         public void MarkdownExporter_ShouldExportAnEmptyDocument()
         {
             Setup();
-            _expectedExportedContent = $"{_tags.OpeningDocument()}{_tags.ClosingDocument()}";
+            ExpectedExportedContent = $"{Tags.OpeningDocument()}{Tags.ClosingDocument()}";
 
-            _document.Accept(_documentExporter);
+            Document.Accept(DocumentExporter);
 
-            Assert.Equal(_expectedExportedContent, _documentExporter.GetExportedContent());
+            Assert.Equal(ExpectedExportedContent, DocumentExporter.GetExportedContent());
         }
 
         [Fact]
         public void MarkdownExporter_ShouldExportADocument_WithAnEmptySection()
         {
             Setup();
-            _document.AddDocumentElement(_section);
-            _expectedExportedContent =
-                $"{_tags.OpeningDocument()}" +
-                $"{_tags.OpeningSection()}{SectionTitle}" +
+            Document.AddDocumentElement(Section);
+            ExpectedExportedContent =
+                $"{Tags.OpeningDocument()}" +
+                $"{Tags.OpeningSection()}{Constant.Section}" +
                 $"{Environment.NewLine}" +
-                $"{_tags.ClosingDocument()}";
+                $"{Tags.ClosingDocument()}";
 
-            _document.Accept(_documentExporter);
+            Document.Accept(DocumentExporter);
 
-            Assert.Equal(_expectedExportedContent, _documentExporter.GetExportedContent());
+            Assert.Equal(ExpectedExportedContent, DocumentExporter.GetExportedContent());
         }
 
         [Fact]
         public void MarkdownExporter_ShouldExportADocument_WithANestedEmptySection()
         {
             Setup();
-            _section.AddDocumentElement(_subSection);
-            _document.AddDocumentElement(_section);
-            _expectedExportedContent =
-                $"{_tags.OpeningDocument()}" +
-                $"{_tags.OpeningSection()}{SectionTitle}" +
+            Section.AddDocumentElement(SubSection);
+            Document.AddDocumentElement(Section);
+            ExpectedExportedContent =
+                $"{Tags.OpeningDocument()}" +
+                $"{Tags.OpeningSection()}{Constant.Section}" +
                 $"{Environment.NewLine}" +
-                $"{_tags.OpeningSubSection()}{NestedSectionTitle}" +
+                $"{Tags.OpeningSubSection()}{Constant.SubSection}" +
                 $"{Environment.NewLine}" +
-                $"{_tags.ClosingDocument()}";
+                $"{Tags.ClosingDocument()}";
 
-            _document.Accept(_documentExporter);
+            Document.Accept(DocumentExporter);
 
-            Assert.Equal(_expectedExportedContent, _documentExporter.GetExportedContent());
+            Assert.Equal(ExpectedExportedContent, DocumentExporter.GetExportedContent());
         }
 
         [Fact]
         public void MarkdownExporter_ShouldExportADocument_WithAnEmptyParagraph()
         {
             Setup();
-            _document.AddDocumentElement(_paragraph);
-            _expectedExportedContent =
-                $"{_tags.OpeningDocument()}" +
-                $"{_tags.OpeningParagraph()}{_tags.ClosingParagraph()}" +
+            Document.AddDocumentElement(Paragraph);
+            ExpectedExportedContent =
+                $"{Tags.OpeningDocument()}" +
+                $"{Tags.OpeningParagraph()}{Tags.ClosingParagraph()}" +
                 $"{Environment.NewLine}" +
-                $"{_tags.ClosingDocument()}";
+                $"{Tags.ClosingDocument()}";
 
-            _document.Accept(_documentExporter);
+            Document.Accept(DocumentExporter);
 
-            Assert.Equal(_expectedExportedContent, _documentExporter.GetExportedContent());
+            Assert.Equal(ExpectedExportedContent, DocumentExporter.GetExportedContent());
         }
 
         [Fact]
         public void MarkdownExporter_ShouldExportADocument_WithAText()
         {
             Setup();
-            _document.AddDocumentElement(_text);
-            _expectedExportedContent =
-                $"{_tags.OpeningDocument()}" +
-                $"{_tags.OpeningText()}{TestingText}{_tags.ClosingText()}" +
-                $"{_tags.ClosingDocument()}";
+            Document.AddDocumentElement(Text);
+            ExpectedExportedContent =
+                $"{Tags.OpeningDocument()}" +
+                $"{Tags.OpeningText()}{Constant.Text}{Tags.ClosingText()}" +
+                $"{Tags.ClosingDocument()}";
 
-            _document.Accept(_documentExporter);
+            Document.Accept(DocumentExporter);
 
-            Assert.Equal(_expectedExportedContent, _documentExporter.GetExportedContent());
+            Assert.Equal(ExpectedExportedContent, DocumentExporter.GetExportedContent());
         }
 
         [Fact]
         public void MarkdownExporter_ShouldExportADocument_WithABoldText()
         {
             Setup();
-            _document.AddDocumentElement(_boldText);
-            _expectedExportedContent =
-                $"{_tags.OpeningDocument()}" +
-                $"{_tags.OpeningBoldText()}{TestingBoldText}{_tags.ClosingBoldText()}" +
-                $"{_tags.ClosingDocument()}";
+            Document.AddDocumentElement(BoldText);
+            ExpectedExportedContent =
+                $"{Tags.OpeningDocument()}" +
+                $"{Tags.OpeningBoldText()}{Constant.BoldText}{Tags.ClosingBoldText()}" +
+                $"{Tags.ClosingDocument()}";
 
-            _document.Accept(_documentExporter);
+            Document.Accept(DocumentExporter);
 
-            Assert.Equal(_expectedExportedContent, _documentExporter.GetExportedContent());
+            Assert.Equal(ExpectedExportedContent, DocumentExporter.GetExportedContent());
         }
 
         [Fact]
         public void MarkdownExporter_ShouldExportADocument_WithSectionParagraphTextAndBoldText()
         {
             Setup();
-            _paragraph.AddDocumentElement(_text);
-            _paragraph.AddDocumentElement(_boldText);
-            _section.AddDocumentElement(_paragraph);
-            _document.AddDocumentElement(_section);
-            _expectedExportedContent =
-                $"{_tags.OpeningDocument()}" +
-                $"{_tags.OpeningSection()}{SectionTitle}" +
+            Paragraph.AddDocumentElement(Text);
+            Paragraph.AddDocumentElement(BoldText);
+            Section.AddDocumentElement(Paragraph);
+            Document.AddDocumentElement(Section);
+            ExpectedExportedContent =
+                $"{Tags.OpeningDocument()}" +
+                $"{Tags.OpeningSection()}{Constant.Section}" +
                 $"{Environment.NewLine}" +
-                $"{_tags.OpeningParagraph()}" +
-                $"{_tags.OpeningText()}{TestingText}{_tags.ClosingText()}" +
-                $"{_tags.OpeningBoldText()}{TestingBoldText}{_tags.ClosingBoldText()}" +
-                $"{_tags.ClosingParagraph()}" +
+                $"{Tags.OpeningParagraph()}" +
+                $"{Tags.OpeningText()}{Constant.Text}{Tags.ClosingText()}" +
+                $"{Tags.OpeningBoldText()}{Constant.BoldText}{Tags.ClosingBoldText()}" +
+                $"{Tags.ClosingParagraph()}" +
                 $"{Environment.NewLine}" +
-                $"{_tags.ClosingDocument()}";
+                $"{Tags.ClosingDocument()}";
 
-            _document.Accept(_documentExporter);
+            Document.Accept(DocumentExporter);
 
-            Assert.Equal(_expectedExportedContent, _documentExporter.GetExportedContent());
+            Assert.Equal(ExpectedExportedContent, DocumentExporter.GetExportedContent());
         }
     }
 }

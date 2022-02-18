@@ -15,8 +15,8 @@ namespace FinsitHomeAssigment.Core.UnitTests.Parser
         private SubSection _subSection;
         private SubSection _nestedSubsection;
         private Paragraph _paragraph;
-        private readonly Text _text = new Text("text");
-        private readonly BoldText _boldText = new BoldText("bold text");
+        private readonly Text _text = new Text(Constant.Text);
+        private readonly BoldText _boldText = new BoldText(Constant.BoldText);
 
         private void Setup(string testCaseFile)
         {
@@ -27,9 +27,9 @@ namespace FinsitHomeAssigment.Core.UnitTests.Parser
             _markdownParser = new MarkdownParser();
 
             _expectedOutput = new Document();
-            _section = new Section("section");
-            _subSection = new SubSection("subsection");
-            _nestedSubsection = new SubSection("nested subsection");
+            _section = new Section(Constant.Section);
+            _subSection = new SubSection(Constant.SubSection);
+            _nestedSubsection = new SubSection(Constant.NestedSubSection);
             _paragraph = new Paragraph();
         }
 

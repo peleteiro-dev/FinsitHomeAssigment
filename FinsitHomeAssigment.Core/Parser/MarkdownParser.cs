@@ -12,7 +12,7 @@ namespace FinsitHomeAssigment.Core.Parser
     public class MarkdownParser : AbstractParser
     {
         private readonly TextLineParser _textLineParser = new TextLineParser();
-        private readonly DocumentBuilder _documentBuilder = new DocumentBuilder();
+        private DocumentBuilder _documentBuilder;
 
         public MarkdownParser()
         {
@@ -23,6 +23,7 @@ namespace FinsitHomeAssigment.Core.Parser
 
         public Document Parse(IEnumerable<string> lines)
         {
+            _documentBuilder = new DocumentBuilder();
             if (lines == null) return _documentBuilder.GetDocument();
 
             foreach (var line in lines)

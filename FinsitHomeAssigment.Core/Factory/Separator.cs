@@ -3,6 +3,9 @@ using FinsitHomeAssigment.Core.Exporter;
 
 namespace FinsitHomeAssigment.Core.Factory
 {
+    /// <summary>
+    /// Used by Factories to identify the different types of Markdown elements
+    /// </summary>
     public class Separator
     {
         private static readonly IDocumentTags MarkdownTags = new MarkdownTags();

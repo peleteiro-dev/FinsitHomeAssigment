@@ -2,6 +2,9 @@
 
 namespace FinsitHomeAssigment.Core.Exporter
 {
+    /// <summary>
+    /// Interface to be implemented by Exporters
+    /// </summary>
     public interface IDocumentExporter
     {
         IDocumentTags GetTags();

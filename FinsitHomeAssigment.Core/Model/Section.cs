@@ -3,6 +3,9 @@ using FinsitHomeAssigment.Core.Exporter;
 
 namespace FinsitHomeAssigment.Core.Model
 {
+    /// <summary>
+    /// Implementation of DocumentElement for Section
+    /// </summary>
     public class Section : DocumentElement
     {
         public string Title { get; set; }

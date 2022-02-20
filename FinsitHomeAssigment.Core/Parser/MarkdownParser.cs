@@ -5,9 +5,14 @@ using System.Collections.Generic;
 
 namespace FinsitHomeAssigment.Core.Parser
 {
+    /// <summary>
+    /// Implementation of AbstractParser to Parse a Markdown text
+    /// into a Document class with the help of a DocumentBuilder and TextLineParser
+    /// </summary>
     public class MarkdownParser : AbstractParser
     {
         private readonly TextLineParser _textLineParser = new TextLineParser();
+        private readonly DocumentBuilder _documentBuilder = new DocumentBuilder();
 
         public MarkdownParser()
         {
@@ -18,23 +23,22 @@ namespace FinsitHomeAssigment.Core.Parser
 
         public Document Parse(IEnumerable<string> lines)
         {
-            var document = new DocumentBuilder();
-            if (lines == null) return document.GetDocument();
+            if (lines == null) return _documentBuilder.GetDocument();
 
             foreach (var line in lines)
             {
                 var documentElement = CreateDocumentElement(line);
                 if (documentElement != null)
                 {
-                    document.AddToDocument(documentElement);
+                    _documentBuilder.AddToDocument(documentElement);
                     continue;
                 }
 
                 var textItems = _textLineParser.Parse(line);
-                document.AddToDocument(textItems);
+                _documentBuilder.AddToDocument(textItems);
             }
 
-            return document.GetDocument();
+            return _documentBuilder.GetDocument();
         }
     }
 }

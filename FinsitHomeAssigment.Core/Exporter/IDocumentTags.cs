@@ -1,5 +1,8 @@
 ﻿namespace FinsitHomeAssigment.Core.Exporter
 {
+    /// <summary>
+    /// Interface to be implemented by different languages tags
+    /// </summary>
     public interface IDocumentTags
     {
         string OpeningDocument();

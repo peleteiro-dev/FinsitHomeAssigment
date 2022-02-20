@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 namespace FinsitHomeAssigment.Core.Model
 {
+    /// <summary>
+    /// Abstract class from which every different document element will inherit
+    /// </summary>
     public abstract class DocumentElement : IEquatable<DocumentElement>
     {
         public IList<DocumentElement> DocumentElements { get; set; } = new List<DocumentElement>();

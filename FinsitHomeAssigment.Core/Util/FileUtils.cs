@@ -6,6 +6,9 @@ using System.Reflection;
 
 namespace FinsitHomeAssigment.Core.Util
 {
+    /// <summary>
+    /// Helper class, provides with functions related to files and their paths.
+    /// </summary>
     public static class FileUtils
     {
         public static string GetAssemblyFullPath() => Assembly.GetExecutingAssembly().Location;

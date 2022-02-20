@@ -7,6 +7,19 @@ using System.Collections.Generic;
 
 namespace FinsitHomeAssigment.Core
 {
+
+    /// <summary>
+    /// Facade of the library, converts a markdown file or set of lines, into a:
+    /// - Html string
+    /// - Mediawiki string
+    /// - Markdown string
+    /// 
+    /// with the help of:
+    /// - MarkdownParser
+    /// - HtmlExporter
+    /// - MediawikiExporter
+    /// - MarkdownExporter
+    /// </summary>
     public class MarkdownConverter
     {
         private static readonly MarkdownParser MarkdownParser = new MarkdownParser();

@@ -4,6 +4,9 @@ using System;
 
 namespace FinsitHomeAssigment
 {
+    /// <summary>
+    /// Console application to serve as an example of using the library
+    /// </summary>
     public class Program
     {
         private static readonly MarkdownConverter MarkdownConverter = new MarkdownConverter();

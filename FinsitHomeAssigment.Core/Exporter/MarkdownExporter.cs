@@ -3,6 +3,9 @@ using System;
 
 namespace FinsitHomeAssigment.Core.Exporter
 {
+    /// <summary>
+    /// Implementation of IDocumentExporter to export a Document to Markdown
+    /// </summary>
     public class MarkdownExporter : IDocumentExporter
     {
         private readonly IDocumentTags _tags = new MarkdownTags();

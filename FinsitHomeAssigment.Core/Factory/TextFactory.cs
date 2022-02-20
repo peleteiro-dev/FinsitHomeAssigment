@@ -3,6 +3,10 @@ using System.Linq;
 
 namespace FinsitHomeAssigment.Core.Factory
 {
+    /// <summary>
+    /// Implementation of IDocumentElementFactory to be used by MarkdownParser
+    /// in order to create Text DocumentElements
+    /// </summary>
     public class TextFactory : IDocumentElementFactory
     {
         public string Delimiter => null;

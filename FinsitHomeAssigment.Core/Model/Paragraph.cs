@@ -3,6 +3,9 @@ using FinsitHomeAssigment.Core.Exporter;
 
 namespace FinsitHomeAssigment.Core.Model
 {
+    /// <summary>
+    /// Implementation of DocumentElement for Paragraph
+    /// </summary>
     public class Paragraph : DocumentElement
     {
         public override bool IsComposite()

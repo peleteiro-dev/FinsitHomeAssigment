@@ -2,6 +2,9 @@
 
 namespace FinsitHomeAssigment.Core.Exporter
 {
+    /// <summary>
+    /// Implementation of IDocumentExporter to export a Document to Html
+    /// </summary>
     public class HtmlExporter : IDocumentExporter
     {
         private readonly IDocumentTags _tags = new HtmlTags();

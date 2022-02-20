@@ -4,6 +4,9 @@ using FinsitHomeAssigment.Core.Factory;
 
 namespace FinsitHomeAssigment.Core.Parser
 {
+    /// <summary>
+    /// Abstract factory class from which every different Parser will inherit
+    /// </summary>
     public abstract class AbstractParser
     {
         private readonly List<IDocumentElementFactory> _factories = new List<IDocumentElementFactory>();

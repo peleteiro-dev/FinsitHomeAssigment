@@ -2,6 +2,10 @@
 
 namespace FinsitHomeAssigment.Core.Factory
 {
+    /// <summary>
+    /// Implementation of IDocumentElementFactory to be used by MarkdownParser
+    /// in order to create SubSection DocumentElements
+    /// </summary>
     public class SubSectionFactory : IDocumentElementFactory
     {
         public string Delimiter => Separator.SubSection;

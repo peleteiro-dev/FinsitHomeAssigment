@@ -3,6 +3,10 @@ using FinsitHomeAssigment.Core.Model;
 
 namespace FinsitHomeAssigment.Core.Builder
 {
+    /// <summary>
+    /// Contains the logic of building a Document class, depending on the type
+    /// of document element added.
+    /// </summary>
     public class DocumentBuilder
     {
         private readonly Document _document = new Document();

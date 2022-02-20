@@ -6,6 +6,11 @@ using FinsitHomeAssigment.Core.Factory;
 
 namespace FinsitHomeAssigment.Core.Parser
 {
+    /// <summary>
+    /// Implementation of AbstractParser to Parse a text line
+    /// into a list of Text and BoldText elements.
+    /// Used only by the Markdown parser
+    /// </summary>
     public class TextLineParser : AbstractParser
     {
         public TextLineParser()

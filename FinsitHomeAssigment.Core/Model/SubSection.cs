@@ -3,6 +3,9 @@ using FinsitHomeAssigment.Core.Exporter;
 
 namespace FinsitHomeAssigment.Core.Model
 {
+    /// <summary>
+    /// Implementation of DocumentElement for SubSection
+    /// </summary>
     public class SubSection : DocumentElement
     {
         public string Title { get; set; }

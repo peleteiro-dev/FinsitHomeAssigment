@@ -1,7 +1,9 @@
-﻿using System;
-
-namespace FinsitHomeAssigment.Core.Exporter
+﻿namespace FinsitHomeAssigment.Core.Exporter
 {
+    /// <summary>
+    /// Implementation of IDocumentTags to provide with mark tags
+    /// used for opening and closing Mediawiki DocumentElements
+    /// </summary>
     public class MediawikiTags : IDocumentTags
     {
         public string OpeningDocument() => string.Empty;

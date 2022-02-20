@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace FinsitHomeAssigment.Core.Extension
 {
+    /// <summary>
+    /// IEnumerable extension methods 
+    /// </summary>
     public static class IEnumerableExtensions
     {
         public static IEnumerable<string> AddNewLine(this IEnumerable<string> strings)

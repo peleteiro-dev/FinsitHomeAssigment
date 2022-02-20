@@ -3,6 +3,9 @@ using System;
 
 namespace FinsitHomeAssigment.Core.Exporter
 {
+    /// <summary>
+    /// Implementation of IDocumentExporter to export a Document to Mediawiki
+    /// </summary>
     public class MediawikiExporter : IDocumentExporter
     {
         private readonly IDocumentTags _tags = new MediawikiTags();

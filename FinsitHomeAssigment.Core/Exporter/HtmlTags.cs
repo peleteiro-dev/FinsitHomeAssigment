@@ -1,5 +1,9 @@
 ﻿namespace FinsitHomeAssigment.Core.Exporter
 {
+    /// <summary>
+    /// Implementation of IDocumentTags to provide with mark tags
+    /// used for opening and closing Html DocumentElements
+    /// </summary>
     public class HtmlTags : IDocumentTags
     {
         public string OpeningDocument() => "<html><head></head><body>";

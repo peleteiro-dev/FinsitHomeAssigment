@@ -2,6 +2,9 @@
 
 namespace FinsitHomeAssigment.Core.Model
 {
+    /// <summary>
+    /// Implementation of DocumentElement for Text
+    /// </summary>
     public class Text : DocumentElement
     {
         public string Content { get; set; }
@@ -23,7 +26,7 @@ namespace FinsitHomeAssigment.Core.Model
 
         public override bool Equals(DocumentElement other)
         {
-            if (other == null || !(other is Text otherText)) return false;
+            if (!(other is Text otherText)) return false;
 
             return Content == otherText.Content &&
                    IsComposite() == otherText.IsComposite();

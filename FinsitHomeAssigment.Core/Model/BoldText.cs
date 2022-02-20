@@ -2,6 +2,9 @@
 
 namespace FinsitHomeAssigment.Core.Model
 {
+    /// <summary>
+    /// Implementation of DocumentElement for BoldText
+    /// </summary>
     public class BoldText : DocumentElement
     {
         public string Content { get; set; }
@@ -23,7 +26,7 @@ namespace FinsitHomeAssigment.Core.Model
 
         public override bool Equals(DocumentElement other)
         {
-            if (other == null || !(other is BoldText otherBoldText)) return false;
+            if (!(other is BoldText otherBoldText)) return false;
 
             return Content == otherBoldText.Content &&
                    IsComposite() == otherBoldText.IsComposite();

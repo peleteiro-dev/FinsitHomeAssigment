@@ -4,6 +4,9 @@ using System.Text.RegularExpressions;
 
 namespace FinsitHomeAssigment.Core.Extension
 {
+    /// <summary>
+    /// String extension methods 
+    /// </summary>
     public static class StringExtensions
     {
         public static IList<string> ToListOfTextItems(this string line, IList<string> delimiters)
